@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nearMe"
+        android:title="@string/near_me"
+        android:icon="@drawable/ic_near_me" />
+
+    <item
+        android:id="@+id/search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search" />
+
+    <item
+        android:id="@+id/useStatus"
+        android:title="@string/use_status"
+        android:icon="@drawable/ic_use_status" />
+
+    <item
+        android:id="@+id/my"
+        android:title="@string/my"
+        android:icon="@drawable/ic_my" />
+</menu>

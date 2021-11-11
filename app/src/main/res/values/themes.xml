@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.GongZone" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/main_color</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -21,5 +21,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/splash_background_color</item>
         <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Widget.BottomNavigationView"
+        parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/noto_sans_cjk_kr_medium</item>
     </style>
 </resources>

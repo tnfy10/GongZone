@@ -2,11 +2,14 @@ package kr.co.wanted.gongzone.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.WindowManager
+import androidx.fragment.app.FragmentTransaction
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
+import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,52 +19,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        val window = window
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
         setContentView(binding.root)
 
-        val slidePanel = binding.mainFrame
-        slidePanel.addPanelSlideListener(PanelEventListener())
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, NearMeFragment.newInstance())
+            .commit()
 
-        // 패널 열고 닫기
-        /*
-        binding.toggleBtn.setOnClickListener {
-            val state = slidePanel.panelState
-
-            // 닫힌 상태일 경우 열기
-            if (state == SlidingUpPanelLayout.PanelState.COLLAPSED) {
-                slidePanel.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
+        binding.bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.nearMe -> supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, NearMeFragment.newInstance())
+                    .commit()
+                R.id.search -> supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, SearchFragment.newInstance())
+                    .commit()
+                R.id.useStatus -> supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, UseStatusFragment.newInstance())
+                    .commit()
+                R.id.my -> supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, MyFragment.newInstance())
+                    .commit()
             }
-            // 열린 상태일 경우 닫기
-            else if (state == SlidingUpPanelLayout.PanelState.EXPANDED) {
-                slidePanel.panelState = SlidingUpPanelLayout.PanelState.COLLAPSED
-            }
+            true
         }
-         */
-    }
-
-    inner class PanelEventListener : SlidingUpPanelLayout.PanelSlideListener {
-        // 패널이 슬라이드 중일 때
-        override fun onPanelSlide(panel: View?, slideOffset: Float) {
-            // TODO
-        }
-
-        // 패널의 상태가 변했을 때
-        override fun onPanelStateChanged(
-            panel: View?,
-            previousState: SlidingUpPanelLayout.PanelState?,
-            newState: SlidingUpPanelLayout.PanelState?
-        ) {
-            if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
-                binding.toggleBtn.visibility = INVISIBLE
-            } else if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
-                binding.toggleBtn.visibility = VISIBLE
-            }
-        }
-
     }
 }

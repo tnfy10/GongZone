@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity"
+    android:id="@+id/mainFrame"
+    android:gravity="bottom"
+    app:umanoDragView="@id/slideLayout"
+    app:umanoPanelHeight="350dp"
+    app:umanoShadowHeight="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/backLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="55dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/search_bar">
+
+                    <ImageButton
+                        android:id="@+id/hamburgerMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@drawable/ic_hamburger_menu"
+                        android:layout_gravity="center_vertical" />
+
+                    <EditText
+                        android:id="@+id/searchEdt"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/search_hint"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/noticeBtn"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/notice_nonactive" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/locationBtn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_location"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/slideLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/toggleBtn"
+            android:layout_width="35dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_slide_toggle">
+        </View>
+    </LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

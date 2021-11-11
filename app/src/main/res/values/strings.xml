@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">공ZONE</string>
+    <string name="near_me">내 근처</string>
+    <string name="search">검색</string>
+    <string name="use_status">이용현황</string>
+    <string name="my">MY</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_hint">장소, 지역, 학교 검색</string>
 </resources>

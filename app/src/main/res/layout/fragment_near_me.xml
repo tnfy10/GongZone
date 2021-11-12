@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
-    android:id="@+id/mainFrame"
-    android:gravity="bottom"
-    app:umanoDragView="@id/slideLayout"
-    app:umanoPanelHeight="350dp"
-    app:umanoShadowHeight="5dp">
+    tools:context=".view.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/backLayout"
@@ -17,7 +12,7 @@
         android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/map"
+            android:id="@+id/mapView"
             android:name="com.naver.maps.map.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -80,26 +75,14 @@
             android:id="@+id/locationBtn"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginBottom="24dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="356dp"
             android:background="@drawable/btn_location"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/slideLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <View
-            android:id="@+id/toggleBtn"
-            android:layout_width="35dp"
-            android:layout_height="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/btn_slide_toggle">
-        </View>
-    </LinearLayout>
-</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+    <include
+        android:id="@+id/includedMainBottomSheet"
+        layout="@layout/bottom_sheet_main" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

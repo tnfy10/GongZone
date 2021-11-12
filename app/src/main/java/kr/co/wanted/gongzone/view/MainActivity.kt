@@ -3,18 +3,15 @@ package kr.co.wanted.gongzone.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
-import android.view.WindowManager
-import androidx.fragment.app.FragmentTransaction
-import com.sothree.slidinguppanel.SlidingUpPanelLayout
+import android.view.MenuItem
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

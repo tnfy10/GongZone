@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.navigation.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigationView"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/navLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/userProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="80dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/userImg"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_profile" />
+
+            <TextView
+                android:id="@+id/userNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="14dp"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                android:text="@string/login"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/useHistoryBtn"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/userProfileBtn"
+            app:layout_constraintTop_toBottomOf="@+id/userProfileBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/use_history"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ticketPurchaseBtn"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/useHistoryBtn"
+            app:layout_constraintTop_toBottomOf="@+id/useHistoryBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/ticket_purchase"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ticketPurchaseHistoryBtn"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/ticketPurchaseBtn"
+            app:layout_constraintTop_toBottomOf="@+id/ticketPurchaseBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/ticket_purchase_history"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/favoritesBtn"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/ticketPurchaseHistoryBtn"
+            app:layout_constraintTop_toBottomOf="@+id/ticketPurchaseHistoryBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/favorites"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/couponBtn"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/favoritesBtn"
+            app:layout_constraintTop_toBottomOf="@+id/favoritesBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/coupon"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:background="#e4e4e4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/couponBtn" />
+
+        <LinearLayout
+            android:id="@+id/noticeBtn"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="25dp"
+                android:text="@string/notice"
+                android:textColor="@color/gray_text"
+                android:textSize="14sp"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/customerServiceBtn"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/noticeBtn"
+            app:layout_constraintTop_toBottomOf="@+id/noticeBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                android:text="@string/customer_service"
+                android:textColor="@color/gray_text"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/settingBtn"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/customerServiceBtn"
+            app:layout_constraintTop_toBottomOf="@+id/customerServiceBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                android:text="@string/setting"
+                android:textColor="@color/gray_text"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.navigation.NavigationView>

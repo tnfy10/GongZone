@@ -55,6 +55,6 @@ dependencies {
     // 네이버 지도
     implementation 'com.naver.maps:map-sdk:3.13.0'
 
-    // 슬라이딩 업패널
-    implementation 'com.github.hannesa2:AndroidSlidingUpPanel:4.3.0'
+    // 현위치 확인
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
 }

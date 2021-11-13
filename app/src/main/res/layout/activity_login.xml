@@ -6,15 +6,130 @@
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity">
 
-    <Button
-        android:id="@+id/testBtn"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="테스트"
+        android:layout_marginTop="144dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:text="@string/sign_in_title"
+            android:textColor="@color/black"
+            android:textSize="21sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:text="@string/sign_in_sub_title"
+            android:textColor="#afb5bc"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/idTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:text="@string/id"
+            android:textColor="@color/gray_text"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/idEdt"
+            android:layout_width="298dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="23dp"
+            android:paddingEnd="23dp"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/sign_in_edt_selector"/>
+
+        <TextView
+            android:id="@+id/pwdTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:text="@string/password"
+            android:textColor="@color/gray_text"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/pwdEdt"
+            android:layout_width="298dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="23dp"
+            android:paddingEnd="23dp"
+            android:inputType="textPassword"
+            android:background="@drawable/sign_in_edt_selector"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/signInBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="57dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_sign_in_btn"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <ImageButton
+        android:id="@+id/signUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_sign_up_btn"
+        app:layout_constraintStart_toStartOf="@+id/signInBtn"
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/findIdBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:text="@string/find_id"
+            android:textColor="@color/gray_text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/findPwdBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:clickable="true"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:text="@string/find_pwd"
+            android:textColor="@color/gray_text"
+            android:textSize="14sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,5 +16,12 @@
     <string name="notice">공지사항</string>
     <string name="customer_service">고객센터</string>
     <string name="setting">설정</string>
-    <string name="login">로그인</string>
+    <string name="sign_in">로그인</string>
+    <string name="sign_in_title">공ZONE에 로그인해 주세요.</string>
+    <string name="sign_in_sub_title">먼저 로그인 한다면 이용권 구매시 아주 편리해요!</string>
+    <string name="id">아이디</string>
+    <string name="password">비밀번호</string>
+    <string name="sign_up">회원가입</string>
+    <string name="find_id">아이디 찾기</string>
+    <string name="find_pwd">비밀번호 찾기</string>
 </resources>

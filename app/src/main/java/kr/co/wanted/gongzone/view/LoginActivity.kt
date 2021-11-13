@@ -2,7 +2,9 @@ package kr.co.wanted.gongzone.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -14,8 +16,36 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.testBtn.setOnClickListener {
+        binding.idEdt.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.idTxt.setTextColor(resources.getColor(R.color.main_color, null))
+            } else {
+                binding.idTxt.setTextColor(resources.getColor(R.color.gray_text, null))
+            }
+        }
+
+        binding.pwdEdt.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.pwdTxt.setTextColor(resources.getColor(R.color.main_color, null))
+            } else {
+                binding.pwdTxt.setTextColor(resources.getColor(R.color.gray_text, null))
+            }
+        }
+
+        binding.signInBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        binding.signUpBtn.setOnClickListener {
+            Toast.makeText(applicationContext, "회원가입", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.findIdBtn.setOnClickListener {
+            Toast.makeText(applicationContext, "아이디 찾기", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.findPwdBtn.setOnClickListener {
+            Toast.makeText(applicationContext, "비밀번호 찾기", Toast.LENGTH_SHORT).show()
         }
     }
 }

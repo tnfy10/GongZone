@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/backLayout"
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/mapView"
-            android:name="com.naver.maps.map.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -21,11 +21,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <com.naver.maps.map.widget.ZoomControlView
+            android:id="@+id/zoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <com.naver.maps.map.widget.LocationButtonView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical"
+            android:fitsSystemWindows="true"
+            app:contentInsetStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -33,53 +53,66 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:gravity="center">
 
                 <LinearLayout
-                    android:layout_width="300dp"
+                    android:layout_width="315dp"
                     android:layout_height="55dp"
-                    android:orientation="horizontal"
-                    android:background="@drawable/search_bar">
+                    android:background="@drawable/search_bar"
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/hamburgerMenu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="13dp"
-                        android:layout_marginBottom="2dp"
-                        android:background="@drawable/ic_hamburger_menu"
-                        android:layout_gravity="center_vertical" />
-
-                    <EditText
-                        android:id="@+id/searchEdt"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
                         android:layout_marginBottom="2dp"
                         android:background="@android:color/transparent"
-                        android:hint="@string/search_hint"
-                        android:layout_gravity="center_vertical" />
+                        android:src="@drawable/ic_hamburger_menu" />
+
+                    <TextView
+                        android:id="@+id/searchBtn"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="2dp"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:text="@string/search_hint"
+                        android:textColor="#afb5bc"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <ImageButton
                     android:id="@+id/noticeBtn"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/notice_nonactive" />
             </LinearLayout>
-        </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-        <ImageButton
-            android:id="@+id/locationBtn"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="356dp"
-            android:background="@drawable/btn_location"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp"
+            android:paddingStart="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <ImageButton
+                android:id="@+id/filterBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/filter" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include

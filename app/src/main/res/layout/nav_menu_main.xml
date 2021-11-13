@@ -14,10 +14,10 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/userProfileBtn"
-            android:layout_width="wrap_content"
+            android:id="@+id/userBtn"
+            android:clickable="true"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
             android:layout_marginTop="80dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,19 +27,58 @@
                 android:id="@+id/userImg"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_marginStart="25dp"
                 android:background="@drawable/ic_profile" />
 
-            <TextView
-                android:id="@+id/userNameTxt"
+            <LinearLayout
+                android:id="@+id/notSignInView"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="14dp"
-                android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                android:text="@string/sign_in"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="normal" />
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                    android:text="@string/sign_in"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/signInView"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="14dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                    android:text="홍길동"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:includeFontPadding="false"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                    android:text="gongzone0_0"
+                    android:textColor="#424242"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    android:includeFontPadding="false"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -50,8 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/userProfileBtn"
-            app:layout_constraintTop_toBottomOf="@+id/userProfileBtn">
+            app:layout_constraintStart_toStartOf="@+id/userBtn"
+            app:layout_constraintTop_toBottomOf="@+id/userBtn">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -155,7 +194,7 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
-            android:background="#e4e4e4"
+            android:background="@color/contour_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/couponBtn" />

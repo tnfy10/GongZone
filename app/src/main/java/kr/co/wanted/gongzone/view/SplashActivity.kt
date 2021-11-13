@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()) {
             if (it.all { permission -> permission.value == true }) {
-                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             } else {
                 Log.d("PermissionCheck", "권한없음 - registerForActivityResult")
@@ -50,7 +50,7 @@ class SplashActivity : AppCompatActivity() {
         super.onResume()
 
         if (checkPermissions(permissions)) {
-            startActivity(Intent(applicationContext, LoginActivity::class.java))
+            startActivity(Intent(applicationContext, MainActivity::class.java))
             finish()
         } else {
             Log.d("PermissionCheck", "권한없음 - checkPermissions")

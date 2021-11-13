@@ -24,4 +24,10 @@
     <string name="sign_up">회원가입</string>
     <string name="find_id">아이디 찾기</string>
     <string name="find_pwd">비밀번호 찾기</string>
+    <string name="gonezone_pick">공ZONE #PICK</string>
+    <string name="max_rating">/5</string>
+    <string name="meter">m</string>
+    <string name="review">후기</string>
+    <string name="gongzone_near">내 근처 공ZONE</string>
+    <string name="division">/</string>
 </resources>

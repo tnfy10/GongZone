@@ -2,7 +2,9 @@ package kr.co.wanted.gongzone.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityLoginBinding
@@ -33,7 +35,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.signInBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent()
+            intent.putExtra("isSigned", true)
+            intent.putExtra("id", "test")
+            setResult(RESULT_OK, intent)
+            finish()
         }
 
         binding.signUpBtn.setOnClickListener {

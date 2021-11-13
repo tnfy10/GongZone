@@ -9,6 +9,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -26,17 +27,33 @@ class SplashActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION)
 
+    private val permissionResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()) {
+            if (it.all { permission -> permission.value == true }) {
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                finish()
+            } else {
+                Log.d("PermissionCheck", "권한없음 - registerForActivityResult")
+                showPermissionGuideDialog()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         if (checkPermissions(permissions)) {
             startActivity(Intent(applicationContext, LoginActivity::class.java))
             finish()
         } else {
-            Toast.makeText(applicationContext, "권한을 허용하셔야 앱 이용이 가능합니다.", Toast.LENGTH_LONG).show()
-            finish()
+            Log.d("PermissionCheck", "권한없음 - checkPermissions")
         }
     }
 
@@ -44,20 +61,9 @@ class SplashActivity : AppCompatActivity() {
      * 권한 검사
      */
     private fun checkPermissions(permissions: Array<String>): Boolean {
-        val permissionResultLauncher =
-            registerForActivityResult(
-                ActivityResultContracts.RequestMultiplePermissions()) {
-                if (it.all { permission -> permission.value == true }) {
-                    startActivity(Intent(applicationContext, LoginActivity::class.java))
-                } else {
-                    Toast.makeText(applicationContext, "권한을 허용하셔야 앱 이용이 가능합니다.", Toast.LENGTH_LONG).show()
-                    finish()
-                }
-            }
-
         val preference = getPreferences(Context.MODE_PRIVATE)
         val isFirstCheck = preference.getBoolean("isFirstPermissionCheck", true)
-        if (permissions.all { ContextCompat.checkSelfPermission(applicationContext, it) != PackageManager.PERMISSION_GRANTED }) {
+        return if (permissions.all { ContextCompat.checkSelfPermission(applicationContext, it) != PackageManager.PERMISSION_GRANTED }) {
             if (permissions.all { ActivityCompat.shouldShowRequestPermissionRationale(this, it) }) {
                 permissionResultLauncher.launch(permissions)
             } else {
@@ -65,26 +71,33 @@ class SplashActivity : AppCompatActivity() {
                     preference.edit().putBoolean("isFirstPermissionCheck", false).apply()
                     permissionResultLauncher.launch(permissions)
                 } else {
-                    val builder = AlertDialog.Builder(this)
-                        .setCancelable(false)
-                        .setTitle("권한 안내")
-                        .setMessage("앱을 사용하기 위해서는 위치 권한이 필요합니다.")
-                        .setPositiveButton("설정") { _, _ ->
-                            val intent = Intent()
-                            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                            val uri = Uri.fromParts("package", packageName, null)
-                            intent.data = uri
-                            startActivity(intent)
-                        }
-                        .setNegativeButton("닫기") { _, _ ->
-                            Toast.makeText(applicationContext, "권한을 허용하셔야 앱 이용이 가능합니다.", Toast.LENGTH_LONG).show()
-                        }
-                    builder.show()
+                    showPermissionGuideDialog()
                 }
             }
-            return false
+            false
         } else {
-            return true
+            true
         }
+    }
+
+    /**
+     * 권한 안내 다이얼로그
+     */
+    private fun showPermissionGuideDialog() {
+        val builder = AlertDialog.Builder(this)
+            .setCancelable(false)
+            .setTitle("권한 안내")
+            .setMessage("앱을 사용하기 위해서는 위치 권한이 필요합니다.")
+            .setPositiveButton("설정") { _, _ ->
+                val intent = Intent()
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                val uri = Uri.fromParts("package", packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            }
+            .setNegativeButton("닫기") { _, _ ->
+                finish()
+            }
+        builder.show()
     }
 }

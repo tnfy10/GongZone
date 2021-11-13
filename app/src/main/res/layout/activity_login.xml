@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="57dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_sign_in_btn"
+        android:src="@drawable/sign_in_btn"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_sign_up_btn"
+        android:src="@drawable/sign_up_btn"
         app:layout_constraintStart_toStartOf="@+id/signInBtn"
         app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
 

@@ -2,19 +2,20 @@ package kr.co.wanted.gongzone.view
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.View.*
-import android.widget.FrameLayout
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.marginTop
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.map.*
@@ -25,6 +26,8 @@ import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
+import kr.co.wanted.gongzone.utils.Size
+import java.lang.invoke.ConstantCallSite
 
 class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -42,7 +45,6 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivity = (activity as MainActivity)
-
     }
 
     override fun onCreateView(
@@ -52,7 +54,7 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
         binding = FragmentNearMeBinding.inflate(inflater, container, false)
 
         mainActivity.setSupportActionBar(binding.toolbar)
-        binding.toolbar.setPadding(0, mainActivity.getStatusBarHeight(), 0, 0)
+        binding.toolbar.setPadding(0, Size.getStatusBarHeight(resources), 0, 0)
 
         val fm = mainActivity.supportFragmentManager
         val mapFragment: MapFragment? = MapFragment.newInstance()
@@ -63,8 +65,10 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
 
         mainNavMenu = mainActivity.binding.includedNavView
         mainBottomSheet = binding.includedMainBottomSheet
-        behavior = BottomSheetBehavior.from(mainBottomSheet.bottomSheet)
         mapView = binding.mapView
+        behavior = BottomSheetBehavior.from(mainBottomSheet.bottomSheet)
+        behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        behavior.expandedOffset = Size.getActionBarHeight(mainActivity.theme) + Size.getStatusBarHeight(resources)
 
         getSignInResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -79,20 +83,49 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
             }
         }
 
-        if (!isSigned) {
-            mainNavMenu.notSignInView.visibility = VISIBLE
-            mainNavMenu.signInView.visibility = GONE
-        }
-
         binding.hamburgerMenu.setOnClickListener {
             mainActivity.binding.drawerLayout.openDrawer(mainNavMenu.navigationView)
         }
 
+        checkSigned()
+        setNavigationItem()
+
+        return binding.root
+    }
+
+    override fun onMapReady(map: NaverMap) {
+        naverMap = map
+
+        naverMap.maxZoom = 18.0
+        naverMap.minZoom = 10.0
+        naverMap.locationSource = locationSource
+
+        val uiSettings = naverMap.uiSettings
+        uiSettings.isCompassEnabled = false
+        uiSettings.isScaleBarEnabled = false
+        uiSettings.isZoomControlEnabled = false
+
+        binding.zoom.map = naverMap
+        binding.location.map = naverMap
+    }
+
+    override fun onClick(overlay: Overlay): Boolean {
+        if (overlay is Marker) {
+            Toast.makeText(context, "마커 선택됨", Toast.LENGTH_SHORT).show()
+            return true
+        }
+        return false
+    }
+
+    /**
+     * 네비게이션 메뉴 항목별 작동 설정
+     */
+    private fun setNavigationItem() {
         mainNavMenu.userBtn.setOnClickListener {
-            if (!isSigned) {
-                getSignInResult.launch(Intent(context, LoginActivity::class.java))
-            } else {
+            if(isSigned) {
                 navBtnTest("로그인됨")
+            } else {
+                getSignInResult.launch(Intent(context, LoginActivity::class.java))
             }
         }
 
@@ -127,43 +160,19 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
         mainNavMenu.settingBtn.setOnClickListener {
             navBtnTest("설정")
         }
-
-        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                // TODO: 상태가 변할 때 작동할 내용
-
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // TODO: 슬라이드 중일 때 작동할 내용
-            }
-        })
-
-        return binding.root
     }
 
-    override fun onMapReady(map: NaverMap) {
-        naverMap = map
-
-        naverMap.maxZoom = 18.0
-        naverMap.minZoom = 10.0
-        naverMap.locationSource = locationSource
-
-        val uiSettings = naverMap.uiSettings
-        uiSettings.isCompassEnabled = false
-        uiSettings.isScaleBarEnabled = false
-        uiSettings.isZoomControlEnabled = false
-
-        binding.zoom.map = naverMap
-        binding.location.map = naverMap
-    }
-
-    override fun onClick(overlay: Overlay): Boolean {
-        if (overlay is Marker) {
-            Toast.makeText(context, "마커 선택됨", Toast.LENGTH_SHORT).show()
-            return true
+    /**
+     * 로그인 여부 확인
+     */
+    private fun checkSigned() {
+        if (isSigned) {
+            mainNavMenu.notSignInView.visibility = GONE
+            mainNavMenu.signInView.visibility = VISIBLE
+        } else {
+            mainNavMenu.notSignInView.visibility = VISIBLE
+            mainNavMenu.signInView.visibility = GONE
         }
-        return false
     }
 
     /**

@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity() {
                         .beginTransaction()
                         .replace(R.id.container, nearMeFragment)
                         .commit()
-
-                    nearMeFragment.behavior.state = BottomSheetBehavior.STATE_COLLAPSED
                 }
                 R.id.search -> supportFragmentManager
                     .beginTransaction()
@@ -95,17 +93,5 @@ class MainActivity : AppCompatActivity() {
                 WindowInsetsCompat.CONSUMED
             }
         }
-    }
-
-    /**
-     * 상태바의 높이를 구하는 메서드
-     */
-    fun getStatusBarHeight(): Int {
-        var result = 0
-        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-           result = resources.getDimensionPixelSize(resourceId)
-        }
-        return result
     }
 }

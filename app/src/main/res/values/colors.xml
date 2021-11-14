@@ -5,7 +5,10 @@
     <color name="light_main_color">#3318f0</color>
     <color name="main_color">#2f1ac0</color>
     <color name="light_sub_color">#739aff</color>
-    <color name="sub_color">#6c93f5</color>
-    <color name="gray_text">#868b95</color>
-    <color name="contour_color">#e4e4e4</color>
+    <color name="sub_color">#5f8bff</color>
+    <color name="gray_1000">#424242</color>
+    <color name="gray_800">#868b95</color>
+    <color name="gray_600">#afb5bc</color>
+    <color name="gray_400">#f4f3f7</color>
+    <color name="gray_200">#e4e4e4</color>
 </resources>

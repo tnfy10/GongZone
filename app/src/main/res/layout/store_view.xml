@@ -75,7 +75,7 @@
             android:includeFontPadding="false"
             android:text="건대1943"
             android:textSize="12sp"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/gray_800"
             android:fontFamily="@font/noto_sans_cjk_kr_regular" />
 
         <LinearLayout
@@ -111,7 +111,7 @@
                     android:includeFontPadding="false"
                     android:text="@string/max_rating"
                     android:textSize="12sp"
-                    android:textColor="@color/gray_text"
+                    android:textColor="@color/gray_800"
                     android:fontFamily="@font/noto_sans_cjk_kr_regular" />
             </LinearLayout>
         </LinearLayout>
@@ -152,7 +152,7 @@
             android:layout_marginStart="5dp"
             android:text="520"
             android:textSize="12sp"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/gray_800"
             android:fontFamily="@font/noto_sans_cjk_kr_medium" />
 
         <TextView
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:text="@string/meter"
             android:textSize="12sp"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/gray_800"
             android:fontFamily="@font/noto_sans_cjk_kr_medium" />
 
         <TextView

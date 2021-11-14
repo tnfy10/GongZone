@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_cjk_kr_bold"
             android:text="@string/sign_in_sub_title"
-            android:textColor="#afb5bc"
+            android:textColor="@color/gray_600"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -49,7 +49,7 @@
             android:layout_marginStart="15dp"
             android:fontFamily="@font/noto_sans_cjk_kr_bold"
             android:text="@string/id"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/gray_800"
             android:textSize="12sp" />
 
         <EditText
@@ -69,7 +69,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/noto_sans_cjk_kr_bold"
             android:text="@string/password"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/gray_800"
             android:textSize="12sp" />
 
         <EditText
@@ -118,7 +118,7 @@
             android:clickable="true"
             android:fontFamily="@font/noto_sans_cjk_kr_medium"
             android:text="@string/find_id"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/gray_800"
             android:textSize="14sp" />
 
         <TextView
@@ -129,7 +129,7 @@
             android:clickable="true"
             android:fontFamily="@font/noto_sans_cjk_kr_medium"
             android:text="@string/find_pwd"
-            android:textColor="@color/gray_text"
+            android:textColor="@color/gray_800"
             android:textSize="14sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

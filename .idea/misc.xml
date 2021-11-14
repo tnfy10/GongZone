@@ -9,18 +9,31 @@
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/btn_location.xml" value="0.23615635179153094" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/btn_location_shadow.xml" value="0.23615635179153094" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/btn_slide_toggle.xml" value="0.23387622149837134" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_address.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_btn_location.xml" value="0.23615635179153094" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_favorite_nonselect.xml" value="0.18958333333333333" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_favorite_selected.xml" value="0.18958333333333333" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_hamburger_menu.xml" value="0.18958333333333333" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_hamburger_menu_notice_activated.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21927083333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_logo_text.xml" value="0.18958333333333333" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_logo_z.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_near_me.xml" value="0.23615635179153094" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_profile.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_search.xml" value="0.23615635179153094" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_splash.xml" value="0.3776041666666667" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_star_one.xml" value="0.18958333333333333" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_use_status.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_vector_201.xml" value="0.23848684210526316" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/image_num_background.xml" value="0.23387622149837134" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sign_in_btn.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sign_in_edt_checked.xml" value="0.23387622149837134" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sign_in_edt_focused.xml" value="0.23387622149837134" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sign_in_edt_not_checked.xml" value="0.23387622149837134" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sign_in_edt_not_focused.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sign_in_edt_selector.xml" value="0.23387622149837134" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sign_up_btn.xml" value="0.23848684210526316" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/slide_toggle_btn.xml" value="0.23848684210526316" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sliding_up_panel.xml" value="0.23615635179153094" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/sliding_up_panel_btn.xml" value="0.2388157894736842" />
@@ -35,6 +48,7 @@
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/dialog_permission_request_guide.xml" value="0.22828947368421051" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_my.xml" value="0.22828947368421051" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_near_me.xml" value="0.22" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_search.xml" value="0.2260586319218241" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_use_status.xml" value="0.22828947368421051" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/main_bottom_sheet.xml" value="0.22828947368421051" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/main_menu.xml" value="0.25" />

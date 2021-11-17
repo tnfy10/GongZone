@@ -1,21 +1,14 @@
-package kr.co.wanted.gongzone.view
+package kr.co.wanted.gongzone.view.main
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.View.*
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.marginTop
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.map.*
@@ -27,7 +20,7 @@ import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
 import kr.co.wanted.gongzone.utils.Size
-import java.lang.invoke.ConstantCallSite
+import kr.co.wanted.gongzone.view.sign.SignInActivity
 
 class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -38,6 +31,7 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: LocationSource
     private lateinit var getSignInResult: ActivityResultLauncher<Intent>
+    private lateinit var getSearchFilterResult: ActivityResultLauncher<Intent>
     lateinit var behavior: BottomSheetBehavior<View>
     lateinit var mapView: FragmentContainerView
     private var isSigned = false
@@ -68,7 +62,7 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
         mapView = binding.mapView
         behavior = BottomSheetBehavior.from(mainBottomSheet.bottomSheet)
         behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        behavior.expandedOffset = Size.getActionBarHeight(mainActivity.theme) + Size.getStatusBarHeight(resources)
+        behavior.expandedOffset = Size.getActionBarHeight(mainActivity.theme) + Size.getStatusBarHeight(resources) + Size.dpToPx(context, 50f).toInt()
 
         getSignInResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -83,8 +77,22 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
             }
         }
 
+        getSearchFilterResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+
+        }
+
         binding.hamburgerMenu.setOnClickListener {
             mainActivity.binding.drawerLayout.openDrawer(mainNavMenu.navigationView)
+        }
+
+        binding.notificationBtn.setOnClickListener {
+            startActivity(Intent(context, NotificationActivity::class.java))
+        }
+
+        binding.filterBtn.setOnClickListener {
+            getSearchFilterResult.launch(Intent(context, SearchFilterActivity::class.java))
         }
 
         checkSigned()
@@ -125,7 +133,7 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
             if(isSigned) {
                 navBtnTest("로그인됨")
             } else {
-                getSignInResult.launch(Intent(context, LoginActivity::class.java))
+                getSignInResult.launch(Intent(context, SignInActivity::class.java))
             }
         }
 

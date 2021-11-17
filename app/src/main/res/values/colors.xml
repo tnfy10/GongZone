@@ -11,4 +11,5 @@
     <color name="gray_600">#afb5bc</color>
     <color name="gray_400">#f4f3f7</color>
     <color name="gray_200">#e4e4e4</color>
+    <color name="non_select">#efefef</color>
 </resources>

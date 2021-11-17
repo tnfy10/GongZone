@@ -15,22 +15,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GongZone">
         <activity
+            android:name=".view.main.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.SearchFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.sign.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.UserActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true" >
-
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".view.sign.SignInActivity"
             android:exported="false" />
 
         <meta-data

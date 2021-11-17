@@ -1,12 +1,10 @@
-package kr.co.wanted.gongzone.view
+package kr.co.wanted.gongzone.view.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.co.wanted.gongzone.R
-import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {

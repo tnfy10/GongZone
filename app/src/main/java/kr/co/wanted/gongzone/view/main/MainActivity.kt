@@ -1,4 +1,4 @@
-package kr.co.wanted.gongzone.view
+package kr.co.wanted.gongzone.view.main
 
 import android.graphics.Color
 import android.os.Build
@@ -10,7 +10,6 @@ import android.widget.FrameLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityMainBinding
 

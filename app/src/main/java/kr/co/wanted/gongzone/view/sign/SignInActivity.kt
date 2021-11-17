@@ -1,28 +1,26 @@
-package kr.co.wanted.gongzone.view
+package kr.co.wanted.gongzone.view.sign
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import kr.co.wanted.gongzone.R
-import kr.co.wanted.gongzone.databinding.ActivityLoginBinding
+import kr.co.wanted.gongzone.databinding.ActivitySignInBinding
 
-class LoginActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivitySignInBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.idEdt.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.idTxt.setTextColor(resources.getColor(R.color.main_color, null))
             } else {
-                binding.idTxt.setTextColor(resources.getColor(R.color.gray_text, null))
+                binding.idTxt.setTextColor(resources.getColor(R.color.gray_800, null))
             }
         }
 
@@ -30,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
             if (hasFocus) {
                 binding.pwdTxt.setTextColor(resources.getColor(R.color.main_color, null))
             } else {
-                binding.pwdTxt.setTextColor(resources.getColor(R.color.gray_text, null))
+                binding.pwdTxt.setTextColor(resources.getColor(R.color.gray_800, null))
             }
         }
 

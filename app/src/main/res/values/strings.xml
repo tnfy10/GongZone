@@ -30,4 +30,24 @@
     <string name="review">후기</string>
     <string name="gongzone_near">내 근처 공ZONE</string>
     <string name="division">/</string>
+    <string name="search_filter">검색 필터</string>
+    <string name="notification">알림</string>
+    <string name="point_4_higher">평점 4.0 이상</string>
+    <string name="current_enter_possible">현재 입실 가능</string>
+    <string name="time">시간</string>
+    <string name="facility">시설</string>
+    <string name="square_table">사각테이블</string>
+    <string name="individual_stand">개인스탠드</string>
+    <string name="white_light">주백색조명</string>
+    <string name="restroom">남녀화장실</string>
+    <string name="socket">콘센트</string>
+    <string name="backrest_chair">등받이 의자</string>
+    <string name="table_type">테이블 타입</string>
+    <string name="small">스몰</string>
+    <string name="medium">미디움</string>
+    <string name="large">라지</string>
+    <string name="rentable_item">대여 가능 품목</string>
+    <string name="charger">충전기</string>
+    <string name="reading_prop">독서받침대</string>
+    <string name="blanket">담요</string>
 </resources>

@@ -12,4 +12,5 @@
     <color name="gray_400">#f4f3f7</color>
     <color name="gray_200">#e4e4e4</color>
     <color name="non_select">#efefef</color>
+    <color name="circle_color">#30209f</color>
 </resources>

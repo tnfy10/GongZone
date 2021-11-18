@@ -1,8 +1,10 @@
 package kr.co.wanted.gongzone.view.main
 
+import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.View.*
 import androidx.fragment.app.Fragment
@@ -10,11 +12,14 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentContainerView
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
-import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.overlay.OverlayImage
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
@@ -29,9 +34,10 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
     private lateinit var mainNavMenu: NavMenuMainBinding
     private lateinit var mainBottomSheet: BottomSheetMainBinding
     private lateinit var naverMap: NaverMap
-    private lateinit var locationSource: LocationSource
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var getSignInResult: ActivityResultLauncher<Intent>
     private lateinit var getSearchFilterResult: ActivityResultLauncher<Intent>
+    private lateinit var chips: ArrayList<String>
     lateinit var behavior: BottomSheetBehavior<View>
     lateinit var mapView: FragmentContainerView
     private var isSigned = false
@@ -39,6 +45,7 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivity = (activity as MainActivity)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainActivity)
     }
 
     override fun onCreateView(
@@ -50,12 +57,7 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.toolbar.setPadding(0, Size.getStatusBarHeight(resources), 0, 0)
 
-        val fm = mainActivity.supportFragmentManager
-        val mapFragment: MapFragment? = MapFragment.newInstance()
-        mapFragment?.let { fm.beginTransaction().add(R.id.mapView, it).commit() }
-        mapFragment?.getMapAsync(this)
-
-        locationSource = FusedLocationSource(this, PERMISSION_REQUEST_CODE)
+        showMapFragment()
 
         mainNavMenu = mainActivity.binding.includedNavView
         mainBottomSheet = binding.includedMainBottomSheet
@@ -80,7 +82,10 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
         getSearchFilterResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
-
+            if (it.resultCode == RESULT_OK) {
+                chips = it.data?.getStringArrayListExtra("selectedChips") as ArrayList<String>
+                applySearchFilters()
+            }
         }
 
         binding.hamburgerMenu.setOnClickListener {
@@ -105,16 +110,31 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
         naverMap = map
 
         naverMap.maxZoom = 18.0
-        naverMap.minZoom = 10.0
-        naverMap.locationSource = locationSource
+        naverMap.minZoom = 5.0
+
+        setCameraPosition()
 
         val uiSettings = naverMap.uiSettings
         uiSettings.isCompassEnabled = false
         uiSettings.isScaleBarEnabled = false
         uiSettings.isZoomControlEnabled = false
 
-        binding.zoom.map = naverMap
-        binding.location.map = naverMap
+        binding.zoomOutBtn.setOnClickListener {
+            val zoomOut = CameraUpdate.zoomOut()
+            zoomOut.animate(CameraAnimation.Fly)
+            naverMap.moveCamera(zoomOut)
+        }
+
+        binding.zoomInBtn.setOnClickListener {
+            val zoomIn = CameraUpdate.zoomIn()
+            zoomIn.animate(CameraAnimation.Fly)
+            naverMap.moveCamera(zoomIn)
+        }
+
+        binding.locationBtn.setOnClickListener {
+            setCameraPosition()
+            naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        }
     }
 
     override fun onClick(overlay: Overlay): Boolean {
@@ -123,6 +143,34 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
             return true
         }
         return false
+    }
+
+    /**
+     * 네이버지도 표시
+     */
+    private fun showMapFragment() {
+        val fm = mainActivity.supportFragmentManager
+        val mapFragment: MapFragment? = MapFragment.newInstance()
+        mapFragment?.let { fm.beginTransaction().add(R.id.mapView, it).commit() }
+        mapFragment?.getMapAsync(this)
+    }
+
+    /**
+     * 네이버지도 카메라 포지션 설정
+     */
+    @SuppressLint("MissingPermission")
+    private fun setCameraPosition() {
+        fusedLocationClient.lastLocation.addOnSuccessListener {
+            val latLng = LatLng(it)
+            val cameraPosition = CameraPosition(latLng, 15.0)
+            val cameraUpdate = CameraUpdate.toCameraPosition(cameraPosition).animate(CameraAnimation.Easing)
+            naverMap.moveCamera(cameraUpdate)
+
+            val locationOverlay = naverMap.locationOverlay
+            locationOverlay.icon = OverlayImage.fromResource(R.drawable.ic_my_location)
+            locationOverlay.position = latLng
+            locationOverlay.isVisible = true
+        }
     }
 
     /**
@@ -184,6 +232,15 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
     }
 
     /**
+     * 검색 필터 적용
+     */
+    private fun applySearchFilters() {
+        for (text in chips) {
+            Log.d("chiptest", text)
+        }
+    }
+
+    /**
      * 네비게이션 드로어 버튼 테스트용
      */
     private fun navBtnTest(content: String) {
@@ -192,8 +249,6 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
     }
 
     companion object {
-        const val PERMISSION_REQUEST_CODE = 2001
-
         fun newInstance() : NearMeFragment {
             return NearMeFragment()
         }

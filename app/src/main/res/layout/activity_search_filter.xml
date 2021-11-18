@@ -57,97 +57,27 @@
             android:orientation="vertical">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
+                android:id="@+id/basicChipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/pointFourHigherChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/point_4_higher"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/currentEnterPossibleChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/current_enter_possible"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/current_enter_possible" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/pointFourHigherChip"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/point_4_higher" />
             </com.google.android.material.chip.ChipGroup>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/gray_400" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/noto_sans_cjk_kr_bold"
-                android:includeFontPadding="false"
-                android:text="@string/time"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:id="@+id/timeStartToEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <TextView
-                    android:id="@+id/startTimeTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
-                    android:includeFontPadding="false"
-                    android:text="-"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/endTimeTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <com.google.android.material.slider.RangeSlider
-                android:id="@+id/timeSlider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:valueFrom="0"
-                android:valueTo="24"
-                app:values="@array/time_slider" />
 
             <View
                 android:layout_width="match_parent"
@@ -169,7 +99,7 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/facilityGroup"
+                android:id="@+id/facilityChipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
@@ -178,57 +108,45 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/squareTableChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/square_table"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/square_table" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/individualStandChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/individual_stand"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/individual_stand" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/whiteLightChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/white_light"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/white_light" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/socketChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/socket"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/socket" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/backrestChairChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/backrest_chair"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/backrest_chair" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/restroomChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/restroom"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/restroom" />
             </com.google.android.material.chip.ChipGroup>
 
             <View
@@ -251,7 +169,7 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/tableTypeGroup"
+                android:id="@+id/tableTypeChipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
@@ -260,30 +178,24 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/smallTableChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/small"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/small" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/mediumTableChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/medium"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/medium" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/largeTableChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/large"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/large" />
             </com.google.android.material.chip.ChipGroup>
 
             <View
@@ -306,7 +218,7 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/rentableItemGroup"
+                android:id="@+id/rentableItemChipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
@@ -316,30 +228,24 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chargerChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/charger"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/charger" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/readingPropChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/reading_prop"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/reading_prop" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/blanketChip"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                    android:text="@string/blanket"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/blanket" />
             </com.google.android.material.chip.ChipGroup>
         </LinearLayout>
     </ScrollView>

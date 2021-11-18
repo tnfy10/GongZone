@@ -21,24 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.naver.maps.map.widget.ZoomControlView
-            android:id="@+id/zoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-        <com.naver.maps.map.widget.LocationButtonView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
-            app:layout_constraintEnd_toEndOf="@+id/zoom"
-            app:layout_constraintTop_toBottomOf="@+id/zoom" />
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -92,14 +74,13 @@
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/filterView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:layout_marginTop="3dp"
-            android:paddingStart="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -108,10 +89,41 @@
                 android:id="@+id/filterBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
-                android:src="@drawable/filter" />
-        </LinearLayout>
+                android:src="@drawable/filter"/>
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/zoomOutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/zoom_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterView" />
+
+        <ImageButton
+            android:id="@+id/zoomInBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/zoom_in"
+            app:layout_constraintEnd_toEndOf="@+id/zoomOutBtn"
+            app:layout_constraintTop_toBottomOf="@+id/zoomOutBtn" />
+
+        <ImageButton
+            android:id="@+id/locationBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/btn_location"
+            app:layout_constraintEnd_toEndOf="@+id/zoomInBtn"
+            app:layout_constraintTop_toBottomOf="@+id/zoomInBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include

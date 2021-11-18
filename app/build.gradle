@@ -38,6 +38,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -57,4 +58,7 @@ dependencies {
 
     // 현위치 확인
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    // i'mport
+    implementation 'com.github.iamport:iamport-android:v1.2.0'
 }

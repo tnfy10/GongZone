@@ -3,6 +3,7 @@ package kr.co.wanted.gongzone.view.main
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.PointF
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentContainerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -21,6 +23,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import kr.co.wanted.gongzone.R
+import kr.co.wanted.gongzone.adapter.FilterViewAdapter
 import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
@@ -37,14 +40,14 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var getSignInResult: ActivityResultLauncher<Intent>
     private lateinit var getSearchFilterResult: ActivityResultLauncher<Intent>
-    private lateinit var chips: ArrayList<String>
+    private var chipIdList = ArrayList<Int>()
     lateinit var behavior: BottomSheetBehavior<View>
     lateinit var mapView: FragmentContainerView
     private var isSigned = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainActivity = (activity as MainActivity)
+        mainActivity = activity as MainActivity
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainActivity)
     }
 
@@ -83,7 +86,7 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                chips = it.data?.getStringArrayListExtra("selectedChips") as ArrayList<String>
+                chipIdList = it.data?.getIntegerArrayListExtra("chipIdList") as ArrayList<Int>
                 applySearchFilters()
             }
         }
@@ -92,12 +95,18 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
             mainActivity.binding.drawerLayout.openDrawer(mainNavMenu.navigationView)
         }
 
+        binding.searchBtn.setOnClickListener {
+            startActivity(Intent(context, SearchActivity::class.java))
+        }
+
         binding.notificationBtn.setOnClickListener {
             startActivity(Intent(context, NotificationActivity::class.java))
         }
 
         binding.filterBtn.setOnClickListener {
-            getSearchFilterResult.launch(Intent(context, SearchFilterActivity::class.java))
+            val intent = Intent(context, SearchFilterActivity::class.java)
+            intent.putExtra("chipIdList", chipIdList)
+            getSearchFilterResult.launch(intent)
         }
 
         checkSigned()
@@ -235,9 +244,55 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
      * 검색 필터 적용
      */
     private fun applySearchFilters() {
-        for (text in chips) {
-            Log.d("chiptest", text)
+        val adapter = FilterViewAdapter()
+        adapter.listData = chipsIdToText()
+        binding.filterRecyclerView.adapter = adapter
+        binding.filterRecyclerView.layoutManager = LinearLayoutManager(
+            mainActivity, LinearLayoutManager.HORIZONTAL, false)
+        if (adapter.itemCount != 0) binding.filterView.visibility = VISIBLE
+        else binding.filterView.visibility = GONE
+    }
+
+    /**
+     * 필터 id를 문자로 변경
+     */
+    private fun chipsIdToText(): ArrayList<String> {
+        val chips = ArrayList<String>()
+
+        for (id in chipIdList) {
+            when (id) {
+                R.id.currentEnterPossibleChip ->
+                    chips.add(resources.getString(R.string.current_enter_possible))
+                R.id.pointFourHigherChip ->
+                    chips.add(resources.getString(R.string.point_4_higher))
+                R.id.squareTableChip ->
+                    chips.add(resources.getString(R.string.square_table))
+                R.id.individualStandChip ->
+                    chips.add(resources.getString(R.string.individual_stand))
+                R.id.whiteLightChip ->
+                    chips.add(resources.getString(R.string.white_light))
+                R.id.socketChip ->
+                    chips.add(resources.getString(R.string.socket))
+                R.id.backrestChairChip ->
+                    chips.add(resources.getString(R.string.backrest_chair))
+                R.id.restroomChip ->
+                    chips.add(resources.getString(R.string.restroom))
+                R.id.smallTableChip ->
+                    chips.add(resources.getString(R.string.small))
+                R.id.mediumTableChip ->
+                    chips.add(resources.getString(R.string.medium))
+                R.id.largeTableChip ->
+                    chips.add(resources.getString(R.string.large))
+                R.id.chargerChip ->
+                    chips.add(resources.getString(R.string.charger))
+                R.id.readingPropChip ->
+                    chips.add(resources.getString(R.string.reading_prop))
+                R.id.blanketChip ->
+                    chips.add(resources.getString(R.string.blanket))
+            }
         }
+
+        return chips
     }
 
     /**

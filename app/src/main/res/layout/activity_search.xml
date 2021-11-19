@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.sign.SignUpActivity" >
+    tools:context=".view.main.SearchActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,22 +24,23 @@
             android:src="@drawable/ic_back"
             android:background="?selectableItemBackgroundBorderless" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/searchEdt"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="@string/sign_up"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:background="@null"
+            android:hint="@string/search_hint"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="2dp"
+        android:background="@color/gray_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />

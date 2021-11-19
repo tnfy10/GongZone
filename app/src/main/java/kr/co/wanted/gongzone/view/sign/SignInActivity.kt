@@ -41,7 +41,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         binding.signUpBtn.setOnClickListener {
-            Toast.makeText(applicationContext, "회원가입", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext, SignUpActivity::class.java))
         }
 
         binding.findIdBtn.setOnClickListener {

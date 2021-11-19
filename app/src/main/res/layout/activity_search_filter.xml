@@ -31,7 +31,8 @@
             android:text="@string/search_filter"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_cjk_kr_bold" />
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:includeFontPadding="false"/>
     </androidx.appcompat.widget.Toolbar>
 
     <View
@@ -251,16 +252,8 @@
     </ScrollView>
 
     <LinearLayout
+        style="@style/BottomButtonBackgroundLayoutStyle"
         android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="10dp"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

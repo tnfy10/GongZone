@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.sign.TermsAndConditionFragment">
+
+    <CheckBox
+        android:id="@+id/allAgreeChkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+        android:text="@string/all_terms_agree"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:background="@color/light_sub_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allAgreeChkBox" />
+
+    <CheckBox
+        android:id="@+id/userTermsAgreeChkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:text="@string/user_terms_agree"
+        android:textColor="@color/gray_1000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/allAgreeChkBox"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <CheckBox
+        android:id="@+id/privacyPolicyAgreeChkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:text="@string/privacy_policy_agree"
+        android:textColor="@color/gray_1000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/userTermsAgreeChkBox"
+        app:layout_constraintTop_toBottomOf="@+id/userTermsAgreeChkBox" />
+
+    <CheckBox
+        android:id="@+id/locationServiceAgreeChkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:text="@string/location_service_agree"
+        android:textColor="@color/gray_1000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/privacyPolicyAgreeChkBox"
+        app:layout_constraintTop_toBottomOf="@+id/privacyPolicyAgreeChkBox" />
+
+    <CheckBox
+        android:id="@+id/receiveMarketingInfoAgreeChkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:text="@string/receive_marketing_service_agree"
+        android:textColor="@color/gray_1000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/locationServiceAgreeChkBox"
+        app:layout_constraintTop_toBottomOf="@+id/locationServiceAgreeChkBox" />
+
+    <LinearLayout
+        style="@style/BottomButtonBackgroundLayoutStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_btn_next" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

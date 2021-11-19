@@ -18,7 +18,7 @@ class SearchFilterActivity : AppCompatActivity() {
     private lateinit var facilityChips: ChipGroup
     private lateinit var tableTypeChips: ChipGroup
     private lateinit var rentableItemChips: ChipGroup
-    private val chips = ArrayList<String>()
+    private val chipIdList = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +29,8 @@ class SearchFilterActivity : AppCompatActivity() {
         facilityChips = binding.facilityChipGroup
         tableTypeChips = binding.tableTypeChipGroup
         rentableItemChips = binding.rentableItemChipGroup
+
+        setCheckChips()
 
         binding.backBtn.setOnClickListener {
             onBackPressed()
@@ -42,14 +44,14 @@ class SearchFilterActivity : AppCompatActivity() {
         }
 
         binding.applyBtn.setOnClickListener {
-            addSelectedChipsText(basicChips)
-            addSelectedChipsText(facilityChips)
-            addSelectedChipsText(tableTypeChips)
-            addSelectedChipsText(rentableItemChips)
+            addSelectedChipIds(basicChips.checkedChipIds)
+            addSelectedChipIds(facilityChips.checkedChipIds)
+            addSelectedChipIds(tableTypeChips.checkedChipIds)
+            addSelectedChipIds(rentableItemChips.checkedChipIds)
 
-            val intent = Intent()
-            intent.putStringArrayListExtra("selectedChips", chips)
-            setResult(RESULT_OK, intent)
+            val data = Intent()
+            data.putIntegerArrayListExtra("chipIdList", chipIdList)
+            setResult(RESULT_OK, data)
             finish()
         }
     }
@@ -60,9 +62,27 @@ class SearchFilterActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun addSelectedChipsText(chipGroup: ChipGroup) {
-        for (i in 0 until chipGroup.childCount) {
-            chips.add((chipGroup.getChildAt(i) as Chip).text as String)
+    /**
+     * 기존 설정된 필터가 있으면 체크
+     */
+    private fun setCheckChips() {
+        val chipsIdList = intent.getIntegerArrayListExtra("chipIdList")
+        if (chipsIdList != null) {
+            for (id in chipsIdList) {
+                basicChips.check(id)
+                facilityChips.check(id)
+                tableTypeChips.check(id)
+                rentableItemChips.check(id)
+            }
+        }
+    }
+
+    /**
+     * 체크된 필터 id를 리스트에 추가
+     */
+    private fun addSelectedChipIds(idList: MutableList<Int>) {
+        for (id in idList) {
+            chipIdList.add(id)
         }
     }
 }

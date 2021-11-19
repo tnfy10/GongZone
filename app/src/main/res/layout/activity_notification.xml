@@ -31,7 +31,8 @@
             android:text="@string/notification"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_cjk_kr_bold" />
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:includeFontPadding="false"/>
     </androidx.appcompat.widget.Toolbar>
 
     <View

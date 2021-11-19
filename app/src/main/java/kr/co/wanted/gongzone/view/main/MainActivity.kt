@@ -1,20 +1,28 @@
 package kr.co.wanted.gongzone.view.main
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityMainBinding
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var getSearchLauncher: ActivityResultLauncher<Intent>
     lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +33,18 @@ class MainActivity : AppCompatActivity() {
         setStatusBarTransparent()
 
         val nearMeFragment = NearMeFragment.newInstance()
+        val useStatusFragment = UseStatusFragment.newInstance()
+        val myFragment = MyFragment.newInstance()
+
+        getSearchLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            when (supportFragmentManager.findFragmentById(R.id.container)) {
+                is NearMeFragment -> binding.bottomNav.menu.findItem(R.id.nearMe).isChecked = true
+                is UseStatusFragment -> binding.bottomNav.menu.findItem(R.id.useStatus).isChecked = true
+                is MyFragment -> binding.bottomNav.menu.findItem(R.id.my).isChecked = true
+            }
+        }
 
         supportFragmentManager
             .beginTransaction()
@@ -33,23 +53,21 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.nearMe -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.container, nearMeFragment)
-                        .commit()
-                }
-                R.id.search -> supportFragmentManager
+                R.id.nearMe -> supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, SearchFragment.newInstance())
+                    .replace(R.id.container, nearMeFragment)
                     .commit()
+                R.id.search -> {
+                    getSearchLauncher.launch(Intent(applicationContext, SearchActivity::class.java))
+                    it.isChecked = false
+                }
                 R.id.useStatus -> supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, UseStatusFragment.newInstance())
+                    .replace(R.id.container, useStatusFragment)
                     .commit()
                 R.id.my -> supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, MyFragment.newInstance())
+                    .replace(R.id.container, myFragment)
                     .commit()
             }
             true

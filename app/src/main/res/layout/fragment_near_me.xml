@@ -148,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="57dp"
             app:layout_constraintBottom_toBottomOf="@+id/mapView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageButton
@@ -163,14 +164,14 @@
 
             <ImageButton
                 android:id="@+id/leaveOutBtn"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|start"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/leave_out" />
+                android:src="@drawable/leave_out"
+                android:visibility="gone" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

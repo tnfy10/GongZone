@@ -48,7 +48,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var getSignInResult: ActivityResultLauncher<Intent>
     private lateinit var getSearchFilterResult: ActivityResultLauncher<Intent>
-    private var bottomSheetHeight by Delegates.notNull<Int>()
+    private var bottomSheetHeight: Int = 0
     private var chipIdList = ArrayList<Int>()
     lateinit var behavior: BottomSheetBehavior<View>
     lateinit var mapView: FragmentContainerView
@@ -58,25 +58,6 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
         super.onCreate(savedInstanceState)
         mainActivity = activity as MainActivity
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainActivity)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentNearMeBinding.inflate(inflater, container, false)
-
-        mainActivity.setSupportActionBar(binding.toolbar)
-        binding.toolbar.setPadding(0, Size.getStatusBarHeight(resources), 0, 0)
-
-        showMapFragment()
-
-        mainNavMenu = mainActivity.binding.includedNavView
-        mainBottomSheet = binding.includedMainBottomSheet
-        mapView = binding.mapView
-        behavior = BottomSheetBehavior.from(mainBottomSheet.bottomSheet)
-        behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        behavior.expandedOffset = Size.getActionBarHeight(mainActivity.theme) + Size.getStatusBarHeight(resources) + Size.dpToPx(context, 50f).toInt()
 
         getSignInResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -99,6 +80,23 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                 applySearchFilters()
             }
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentNearMeBinding.inflate(inflater, container, false)
+
+        mainActivity.setSupportActionBar(binding.toolbar)
+        binding.toolbar.setPadding(0, Size.getStatusBarHeight(resources), 0, 0)
+
+        mainNavMenu = mainActivity.binding.includedNavView
+        mainBottomSheet = binding.includedMainBottomSheet
+        mapView = binding.mapView
+        behavior = BottomSheetBehavior.from(mainBottomSheet.bottomSheet)
+        behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        behavior.expandedOffset = Size.getActionBarHeight(mainActivity.theme) + Size.getStatusBarHeight(resources) + Size.dpToPx(context, 50f).toInt()
 
         binding.hamburgerMenu.setOnClickListener {
             mainActivity.binding.drawerLayout.openDrawer(mainNavMenu.navigationView)
@@ -122,29 +120,25 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
             override fun onStateChanged(bottomSheet: View, newState: Int) { }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                when (behavior.state) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> { }
-                    BottomSheetBehavior.STATE_DRAGGING -> setMoveFloatingView(bottomSheet, slideOffset)
-                    BottomSheetBehavior.STATE_EXPANDED -> { }
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
-                    BottomSheetBehavior.STATE_HIDDEN -> { }
-                    BottomSheetBehavior.STATE_SETTLING -> setMoveFloatingView(bottomSheet, slideOffset)
-                }
+                setMoveFloatingView(bottomSheet, slideOffset)
             }
         })
 
-        checkSigned()
         setNavigationItem()
+        showMapFragment()
 
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        checkSigned()
+        applySearchFilters()
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         bottomSheetHeight = mainBottomSheet.bottomSheet.height
-        val mapBottom = (bottomSheetHeight * behavior.halfExpandedRatio).roundToInt()
-        val floatingBottom = (bottomSheetHeight * (behavior.halfExpandedRatio - 0.013f)).roundToInt()
-        naverMap.setContentPadding(0, 0, 0, mapBottom)
-        binding.floatingView.setPadding(0, 0, 0, floatingBottom)
+        setFloatingViewPadding()
     }
 
     override fun onMapReady(map: NaverMap) {
@@ -166,6 +160,8 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
         val right = Size.dpToPx(context, 16f).toInt()
         uiSettings.setLogoMargin(0, 0, right, bottom)
         uiSettings.logoGravity = Gravity.END or Gravity.BOTTOM
+
+        setFloatingViewPadding()
 
         binding.zoomOutBtn.setOnClickListener {
             val zoomOut = CameraUpdate.zoomOut()
@@ -193,13 +189,38 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
         return false
     }
 
+    /**
+     * floatingView 패딩 설정
+     */
+    private fun setFloatingViewPadding() {
+        var bottom = 0f
+
+        when (behavior.state) {
+            BottomSheetBehavior.STATE_COLLAPSED -> { }
+            BottomSheetBehavior.STATE_DRAGGING -> { }
+            BottomSheetBehavior.STATE_EXPANDED -> {
+                bottom = bottomSheetHeight / 1.2f
+            }
+            BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                bottom = bottomSheetHeight * behavior.halfExpandedRatio / 1.2f
+            }
+            BottomSheetBehavior.STATE_HIDDEN -> { }
+            BottomSheetBehavior.STATE_SETTLING -> { }
+        }
+
+        naverMap.setContentPadding(0, 0, 0, bottom.roundToInt())
+        binding.floatingView.setPadding(0, 0, 0, bottom.roundToInt())
+    }
+
+    /**
+     * floatingView 동적 패딩 설정
+     */
     private fun setMoveFloatingView(bottomSheet: View, slideOffset: Float) {
-        val h = bottomSheet.height
-        val off = h * (slideOffset - 0.033f)
-        val maxPadding = 1.0f
-        if (slideOffset <= 0.38165817f) {
-            naverMap.setContentPadding(0, 0, 0, (off * maxPadding).roundToInt())
-            binding.floatingView.setPadding(0, 0, 0, (off * maxPadding).roundToInt())
+        val value = 1.2f
+        val off = bottomSheet.height * slideOffset / value
+        if (slideOffset <= 0.38f) {
+            naverMap.setContentPadding(0, 0, 0, (off/(value-0.1f)).roundToInt())
+            binding.floatingView.setPadding(0, 0, 0, off.roundToInt())
         }
     }
 

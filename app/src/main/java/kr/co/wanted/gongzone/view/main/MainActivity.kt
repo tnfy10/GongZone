@@ -74,6 +74,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
+        if (currentFragment is IOnFocusListenable) {
+            currentFragment.onWindowFocusChanged(hasFocus)
+        }
+    }
+
     /**
      * 상태바는 투명하게 내비게이션 바는 투명이 적용되지 않게 하는 메서드
      */

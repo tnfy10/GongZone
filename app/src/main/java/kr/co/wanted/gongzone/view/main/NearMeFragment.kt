@@ -8,10 +8,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.View.*
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.marginBottom
+import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -29,8 +35,10 @@ import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
 import kr.co.wanted.gongzone.utils.Size
 import kr.co.wanted.gongzone.view.sign.SignInActivity
+import kotlin.math.roundToInt
+import kotlin.properties.Delegates
 
-class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
+class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overlay.OnClickListener {
 
     private lateinit var binding: FragmentNearMeBinding
     private lateinit var mainActivity: MainActivity
@@ -40,6 +48,7 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var getSignInResult: ActivityResultLauncher<Intent>
     private lateinit var getSearchFilterResult: ActivityResultLauncher<Intent>
+    private var bottomSheetHeight by Delegates.notNull<Int>()
     private var chipIdList = ArrayList<Int>()
     lateinit var behavior: BottomSheetBehavior<View>
     lateinit var mapView: FragmentContainerView
@@ -109,10 +118,33 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
             getSearchFilterResult.launch(intent)
         }
 
+        behavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
+            override fun onStateChanged(bottomSheet: View, newState: Int) { }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                when (behavior.state) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> { }
+                    BottomSheetBehavior.STATE_DRAGGING -> setMoveFloatingView(bottomSheet, slideOffset)
+                    BottomSheetBehavior.STATE_EXPANDED -> { }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
+                    BottomSheetBehavior.STATE_HIDDEN -> { }
+                    BottomSheetBehavior.STATE_SETTLING -> setMoveFloatingView(bottomSheet, slideOffset)
+                }
+            }
+        })
+
         checkSigned()
         setNavigationItem()
 
         return binding.root
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        bottomSheetHeight = mainBottomSheet.bottomSheet.height
+        val mapBottom = (bottomSheetHeight * behavior.halfExpandedRatio).roundToInt()
+        val floatingBottom = (bottomSheetHeight * (behavior.halfExpandedRatio - 0.013f)).roundToInt()
+        naverMap.setContentPadding(0, 0, 0, mapBottom)
+        binding.floatingView.setPadding(0, 0, 0, floatingBottom)
     }
 
     override fun onMapReady(map: NaverMap) {
@@ -127,6 +159,13 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
         uiSettings.isCompassEnabled = false
         uiSettings.isScaleBarEnabled = false
         uiSettings.isZoomControlEnabled = false
+        uiSettings.isTiltGesturesEnabled = false
+        uiSettings.isRotateGesturesEnabled = false
+
+        val bottom = Size.dpToPx(context, 70f).toInt()
+        val right = Size.dpToPx(context, 16f).toInt()
+        uiSettings.setLogoMargin(0, 0, right, bottom)
+        uiSettings.logoGravity = Gravity.END or Gravity.BOTTOM
 
         binding.zoomOutBtn.setOnClickListener {
             val zoomOut = CameraUpdate.zoomOut()
@@ -152,6 +191,16 @@ class NearMeFragment : Fragment(), OnMapReadyCallback, Overlay.OnClickListener {
             return true
         }
         return false
+    }
+
+    private fun setMoveFloatingView(bottomSheet: View, slideOffset: Float) {
+        val h = bottomSheet.height
+        val off = h * (slideOffset - 0.033f)
+        val maxPadding = 1.0f
+        if (slideOffset <= 0.38165817f) {
+            naverMap.setContentPadding(0, 0, 0, (off * maxPadding).roundToInt())
+            binding.floatingView.setPadding(0, 0, 0, (off * maxPadding).roundToInt())
+        }
     }
 
     /**

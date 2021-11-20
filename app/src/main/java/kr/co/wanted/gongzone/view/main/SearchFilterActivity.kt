@@ -3,12 +3,8 @@ package kr.co.wanted.gongzone.view.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivitySearchFilterBinding
-import okhttp3.internal.checkDuration
 import java.util.ArrayList
 
 class SearchFilterActivity : AppCompatActivity() {

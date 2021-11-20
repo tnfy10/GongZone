@@ -3,21 +3,17 @@ package kr.co.wanted.gongzone.view.main
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.PointF
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import android.view.View.*
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import androidx.fragment.app.Fragment
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.marginBottom
-import androidx.core.view.setPadding
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -35,8 +31,8 @@ import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
 import kr.co.wanted.gongzone.utils.Size
 import kr.co.wanted.gongzone.view.sign.SignInActivity
+import kr.co.wanted.gongzone.view.store.StoreActivity
 import kotlin.math.roundToInt
-import kotlin.properties.Delegates
 
 class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -123,6 +119,10 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                 setMoveFloatingView(bottomSheet, slideOffset)
             }
         })
+
+        mainBottomSheet.includedGongZonePick.storeDetailBtn.setOnClickListener {
+            startActivity(Intent(context, StoreActivity::class.java))
+        }
 
         setNavigationItem()
         showMapFragment()

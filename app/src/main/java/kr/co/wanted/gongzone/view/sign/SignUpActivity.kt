@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivitySignUpBinding
-import kr.co.wanted.gongzone.view.main.NearMeFragment
 
 class SignUpActivity : AppCompatActivity() {
 

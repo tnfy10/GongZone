@@ -17,6 +17,9 @@
         android:theme="@style/Theme.GongZone"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".view.store.StoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.main.SearchActivity"
             android:exported="false" />
         <activity

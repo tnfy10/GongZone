@@ -22,7 +22,7 @@
             android:layout_marginTop="13dp"
             android:layout_marginEnd="13dp"
             android:layout_gravity="end"
-            android:src="@drawable/ic_favorite_nonselect"
+            android:src="@drawable/ic_favorite_nonselect_white"
             android:background="@android:color/transparent" />
 
         <LinearLayout
@@ -61,128 +61,136 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/storeDetailBtn"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal" >
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/storeNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="건대1943"
+                android:textSize="12sp"
+                android:textColor="@color/gray_800"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_star_one" />
+
+                    <TextView
+                        android:id="@+id/ratingTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="4.9"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="@string/max_rating"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray_800"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/storeNameTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/storeIntroTxt"
             android:includeFontPadding="false"
-            android:text="건대1943"
-            android:textSize="12sp"
-            android:textColor="@color/gray_800"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="넓은 테이블로 공부하기 쾌적한 조건의 공존 플레이스"
+            android:textColor="#424242"
+            android:textSize="14sp"
             android:fontFamily="@font/noto_sans_cjk_kr_regular" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_address" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_one" />
+            <TextView
+                android:id="@+id/distanceTxt"
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="520"
+                android:textSize="12sp"
+                android:textColor="@color/gray_800"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium" />
 
-                <TextView
-                    android:id="@+id/ratingTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:text="4.9"
-                    android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/noto_sans_cjk_kr_regular" />
+            <TextView
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/meter"
+                android:textSize="12sp"
+                android:textColor="@color/gray_800"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:text="@string/max_rating"
-                    android:textSize="12sp"
-                    android:textColor="@color/gray_800"
-                    android:fontFamily="@font/noto_sans_cjk_kr_regular" />
-            </LinearLayout>
+            <TextView
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/review"
+                android:textSize="12sp"
+                android:textColor="#424242"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium" />
+
+            <TextView
+                android:id="@+id/reviewsTxt"
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="120"
+                android:textSize="12sp"
+                android:textColor="#424242"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium" />
         </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/storeIntroTxt"
-        android:includeFontPadding="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="넓은 테이블로 공부하기 쾌적한 조건의 공존 플레이스"
-        android:textColor="#424242"
-        android:textSize="14sp"
-        android:fontFamily="@font/noto_sans_cjk_kr_regular" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_address" />
-
-        <TextView
-            android:id="@+id/distanceTxt"
-            android:includeFontPadding="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="520"
-            android:textSize="12sp"
-            android:textColor="@color/gray_800"
-            android:fontFamily="@font/noto_sans_cjk_kr_medium" />
-
-        <TextView
-            android:includeFontPadding="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/meter"
-            android:textSize="12sp"
-            android:textColor="@color/gray_800"
-            android:fontFamily="@font/noto_sans_cjk_kr_medium" />
-
-        <TextView
-            android:includeFontPadding="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/review"
-            android:textSize="12sp"
-            android:textColor="#424242"
-            android:fontFamily="@font/noto_sans_cjk_kr_medium" />
-
-        <TextView
-            android:id="@+id/reviewsTxt"
-            android:includeFontPadding="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="120"
-            android:textSize="12sp"
-            android:textColor="#424242"
-            android:fontFamily="@font/noto_sans_cjk_kr_medium" />
     </LinearLayout>
 </LinearLayout>

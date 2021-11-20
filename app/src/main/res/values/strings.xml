@@ -64,4 +64,7 @@
     <string name="location_service_agree">(선택) 위치기반 서비스 이용약관 동의</string>
     <string name="receive_marketing_service_agree">(선택) 마케팅 정보 수신 동의</string>
     <string name="bar">|</string>
+    <string name="mid_dot">·</string>
+    <string name="guidelines_for_refund">이용 환불 규정 안내</string>
+    <string name="guidelines_for_refund_content">이용 환불은 고객센터에 문의해 주세요.</string>
 </resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.store.LocationFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="매장 위치"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/noto_sans_cjk_kr_bold"
+        android:includeFontPadding="false"/>
+
+    <com.naver.maps.map.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="178dp"
+        android:layout_marginTop="21dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_address" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/addressTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="서울시 광진구 00빌딩 1층 건대1943"
+                android:textSize="14sp"
+                android:textColor="@color/gray_1000"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:id="@+id/timeRequiredTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="건국대학교 정문에서 도보 5분, 건대입구역에서 도보 10분"
+                android:textSize="12sp"
+                android:textColor="@color/gray_800"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/findWayBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_btn_find_way"
+        android:background="@android:color/transparent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/gray_400" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/guidelines_for_refund"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="31dp"
+            android:text="@string/guidelines_for_refund_content"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1000"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:includeFontPadding="false" />
+    </LinearLayout>
+</LinearLayout>

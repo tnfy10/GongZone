@@ -3,22 +3,18 @@ package kr.co.wanted.gongzone.view.main
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityMainBinding
-import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 

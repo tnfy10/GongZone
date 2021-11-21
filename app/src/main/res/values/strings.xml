@@ -67,4 +67,13 @@
     <string name="mid_dot">·</string>
     <string name="guidelines_for_refund">이용 환불 규정 안내</string>
     <string name="guidelines_for_refund_content">이용 환불은 고객센터에 문의해 주세요.</string>
+    <string name="seat_status">좌석 현황</string>
+    <string name="remain_seat">총 잔여 좌석:</string>
+    <string name="remain_seats_by_table_type">테이블 타입별 잔여 좌석</string>
+    <string name="store_intro">매장 소개</string>
+    <string name="store_info">매장 정보</string>
+    <string name="business_hours">영업시간</string>
+    <string name="phone">전화번호</string>
+    <string name="notice_and_event">공지·이벤트</string>
+    <string name="rentable">대여 가능</string>
 </resources>

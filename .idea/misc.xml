@@ -26,6 +26,7 @@
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_logo_text.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_logo_z.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_near_me.xml" value="0.23615635179153094" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_one_on_one_talk.xml" value="0.23615635179153094" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_profile.xml" value="0.18958333333333333" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_search.xml" value="0.23615635179153094" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable/ic_show_more_image.xml" value="0.23615635179153094" />
@@ -72,7 +73,7 @@
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_review.xml" value="0.22828947368421051" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_search.xml" value="0.2260586319218241" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_search_filter.xml" value="0.22828947368421051" />
-        <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_space_guide.xml" value="0.22828947368421051" />
+        <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_space_guide.xml" value="0.22" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_store_info.xml" value="0.22828947368421051" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_terms_and_condition.xml" value="0.22828947368421051" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/layout/fragment_use_status.xml" value="0.22828947368421051" />

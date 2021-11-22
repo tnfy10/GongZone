@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -29,9 +30,15 @@ import kr.co.wanted.gongzone.adapter.FilterViewAdapter
 import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
+import kr.co.wanted.gongzone.model.User
+import kr.co.wanted.gongzone.service.UserService
+import kr.co.wanted.gongzone.utils.PreferenceManager
 import kr.co.wanted.gongzone.utils.Size
 import kr.co.wanted.gongzone.view.sign.SignInActivity
 import kr.co.wanted.gongzone.view.store.StoreActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.math.roundToInt
 
 class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overlay.OnClickListener {
@@ -42,31 +49,16 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
     private lateinit var mainBottomSheet: BottomSheetMainBinding
     private lateinit var naverMap: NaverMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var getSignInResult: ActivityResultLauncher<Intent>
     private lateinit var getSearchFilterResult: ActivityResultLauncher<Intent>
+    private lateinit var behavior: BottomSheetBehavior<View>
     private var bottomSheetHeight: Int = 0
     private var chipIdList = ArrayList<Int>()
-    lateinit var behavior: BottomSheetBehavior<View>
     lateinit var mapView: FragmentContainerView
-    private var isSigned = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivity = activity as MainActivity
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainActivity)
-
-        getSignInResult = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            if (it.resultCode == RESULT_OK) {
-                isSigned = it.data?.getBooleanExtra("isSigned", false) == true
-                if (isSigned) {
-                    val id = it.data?.getStringExtra("id")
-                    mainNavMenu.notSignInView.visibility = GONE
-                    mainNavMenu.signInView.visibility = VISIBLE
-                }
-            }
-        }
 
         getSearchFilterResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -124,7 +116,46 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
             startActivity(Intent(context, StoreActivity::class.java))
         }
 
-        setNavigationItem()
+        mainNavMenu.userBtn.setOnClickListener {
+            if(checkSigned()) {
+                Toast.makeText(context, "로그인됨", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(context, SignInActivity::class.java))
+            }
+        }
+
+        mainNavMenu.useHistoryBtn.setOnClickListener {
+
+        }
+
+        mainNavMenu.ticketPurchaseBtn.setOnClickListener {
+
+        }
+
+        mainNavMenu.ticketPurchaseHistoryBtn.setOnClickListener {
+
+        }
+
+        mainNavMenu.favoritesBtn.setOnClickListener {
+
+        }
+
+        mainNavMenu.couponBtn.setOnClickListener {
+
+        }
+
+        mainNavMenu.noticeBtn.setOnClickListener {
+
+        }
+
+        mainNavMenu.customerServiceBtn.setOnClickListener {
+
+        }
+
+        mainNavMenu.settingBtn.setOnClickListener {
+
+        }
+
         showMapFragment()
 
         return binding.root
@@ -132,7 +163,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
 
     override fun onResume() {
         super.onResume()
-        checkSigned()
+        getUserInfo()
         applySearchFilters()
     }
 
@@ -253,62 +284,10 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
     }
 
     /**
-     * 네비게이션 메뉴 항목별 작동 설정
-     */
-    private fun setNavigationItem() {
-        mainNavMenu.userBtn.setOnClickListener {
-            if(isSigned) {
-                navBtnTest("로그인됨")
-            } else {
-                getSignInResult.launch(Intent(context, SignInActivity::class.java))
-            }
-        }
-
-        mainNavMenu.useHistoryBtn.setOnClickListener {
-            navBtnTest("이용내역")
-        }
-
-        mainNavMenu.ticketPurchaseBtn.setOnClickListener {
-            navBtnTest("이용권 구매")
-        }
-
-        mainNavMenu.ticketPurchaseHistoryBtn.setOnClickListener {
-            navBtnTest("이용권 구매 내역")
-        }
-
-        mainNavMenu.favoritesBtn.setOnClickListener {
-            navBtnTest("관심 목록")
-        }
-
-        mainNavMenu.couponBtn.setOnClickListener {
-            navBtnTest("쿠폰")
-        }
-
-        mainNavMenu.noticeBtn.setOnClickListener {
-            navBtnTest("공지사항")
-        }
-
-        mainNavMenu.customerServiceBtn.setOnClickListener {
-            navBtnTest("고객센터")
-        }
-
-        mainNavMenu.settingBtn.setOnClickListener {
-            navBtnTest("설정")
-        }
-    }
-
-    /**
      * 로그인 여부 확인
      */
-    private fun checkSigned() {
-        if (isSigned) {
-            mainNavMenu.notSignInView.visibility = GONE
-            mainNavMenu.signInView.visibility = VISIBLE
-        } else {
-            mainNavMenu.notSignInView.visibility = VISIBLE
-            mainNavMenu.signInView.visibility = GONE
-        }
-    }
+    private fun checkSigned()
+    = PreferenceManager.getBoolean(mainActivity, "isSigned")
 
     /**
      * 검색 필터 적용
@@ -366,14 +345,43 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
     }
 
     /**
-     * 네비게이션 드로어 버튼 테스트용
+     * 사용자 정보 로드
      */
-    private fun navBtnTest(content: String) {
-        Toast.makeText(context, content, Toast.LENGTH_SHORT).show()
-        mainActivity.binding.drawerLayout.closeDrawers()
+    private fun getUserInfo() {
+        if (checkSigned()) {
+            val id = PreferenceManager.getString(mainActivity, "userId")
+            val pwd = PreferenceManager.getString(mainActivity, "pwd")
+
+            if (id!=null && pwd!=null) {
+                UserService.create().getUser(id, pwd).enqueue(object: Callback<User> {
+                    override fun onResponse(call: Call<User>, response: Response<User>) {
+                        val user = response.body()?.get(0)
+
+                        if (user!=null) {
+                            mainNavMenu.userNameTxt.text = user.name
+                            mainNavMenu.userIdTxt.text = user.userId
+                            mainNavMenu.signInView.visibility = VISIBLE
+                            mainNavMenu.notSignInView.visibility = GONE
+                        } else {
+                            mainNavMenu.signInView.visibility = GONE
+                            mainNavMenu.notSignInView.visibility = VISIBLE
+                        }
+                    }
+
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+                        Log.d(TAG, "통신실패: ${t.message}")
+                        mainNavMenu.signInView.visibility = GONE
+                        mainNavMenu.notSignInView.visibility = VISIBLE
+                    }
+
+                })
+            }
+        }
     }
 
     companion object {
+        private const val TAG = "NearMeFragment"
+
         fun newInstance() : NearMeFragment {
             return NearMeFragment()
         }

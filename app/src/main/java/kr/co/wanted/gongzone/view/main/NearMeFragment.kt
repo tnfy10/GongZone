@@ -30,7 +30,7 @@ import kr.co.wanted.gongzone.adapter.FilterViewAdapter
 import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
-import kr.co.wanted.gongzone.model.User
+import kr.co.wanted.gongzone.model.user.User
 import kr.co.wanted.gongzone.service.UserService
 import kr.co.wanted.gongzone.utils.PreferenceManager
 import kr.co.wanted.gongzone.utils.Size
@@ -81,6 +81,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
 
         mainNavMenu = mainActivity.binding.includedNavView
         mainBottomSheet = binding.includedMainBottomSheet
+        mainBottomSheet.includedGongZonePick.monthOfBestImg.visibility = VISIBLE
         mapView = binding.mapView
         behavior = BottomSheetBehavior.from(mainBottomSheet.bottomSheet)
         behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED

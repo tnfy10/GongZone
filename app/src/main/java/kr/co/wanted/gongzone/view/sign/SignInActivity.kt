@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivitySignInBinding
-import kr.co.wanted.gongzone.model.User
+import kr.co.wanted.gongzone.model.user.User
 import kr.co.wanted.gongzone.service.UserService
 import kr.co.wanted.gongzone.utils.PreferenceManager
 import retrofit2.Call

@@ -76,4 +76,5 @@
     <string name="phone">전화번호</string>
     <string name="notice_and_event">공지·이벤트</string>
     <string name="rentable">대여 가능</string>
+    <string name="use_review">이용 후기</string>
 </resources>

@@ -21,6 +21,8 @@ android {
 
         manifestPlaceholders = [NAVER_MAP_CLIENT_ID:naver_map_client_id]
         buildConfigField "String", "SERVER_URL", properties['server.url']
+        buildConfigField "String", "NAVER_MAP_CLIENT_ID", "\""+naver_map_client_id+"\""
+        buildConfigField "String", "NAVER_MAP_CLIENT_SECRET", properties['naver.map.client.secret']
     }
 
     buildTypes {

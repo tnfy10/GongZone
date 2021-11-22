@@ -1,4 +1,4 @@
-package kr.co.wanted.gongzone.model
+package kr.co.wanted.gongzone.model.user
 
 data class UserItem(
     val name: String,

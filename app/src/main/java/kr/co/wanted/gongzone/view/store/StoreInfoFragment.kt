@@ -56,15 +56,22 @@ class StoreInfoFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) { }
         })
 
+        binding.enterRoomBtn.setOnClickListener {
+            storeActivity.supportFragmentManager.beginTransaction().apply {
+                replace(R.id.container, storeActivity.enterRoomFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
         return binding.root
     }
 
     private fun changeTabView(selected: Fragment) {
-        storeActivity
-            .supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.tabView, selected)
-            .commit()
+        childFragmentManager.beginTransaction().apply {
+            replace(binding.tabView.id, selected)
+            commit()
+        }
     }
 
     companion object {

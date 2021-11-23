@@ -3,6 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable-hdpi/filter_view_background.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable-hdpi/seat_select_positive.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/background_under_line.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/background_under_line_bold.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/enter_room_current_page_left.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/enter_room_current_page_right.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/enter_room_non_current_page_left.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/enter_room_non_current_page_right.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/filter_view_background1.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/ic_enter_room_btn_activate.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/ic_seat_select.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/ic_seat_selected.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/seat_select_negative.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/seat_select_positive.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/seat_selected.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/layout/activity_notification.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/layout/activity_store.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/layout/fragment_enter_room.xml" value="0.21907894736842104" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/layout/fragment_review.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/layout/fragment_seat_select.xml" value="0.25" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/layout/fragment_space_guide.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/layout/fragment_store_info.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/layout/fragment_voucher_select.xml" value="0.22828947368421051" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable-hdpi/favorite_selector.xml" value="0.23387622149837134" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable-hdpi/filter_view_background.xml" value="0.23615635179153094" />
         <entry key="..\:/android_project/GongZone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23615635179153094" />

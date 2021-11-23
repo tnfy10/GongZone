@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityMainBinding
 
@@ -42,29 +43,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, nearMeFragment)
-            .commit()
+        changeFragment(nearMeFragment)
 
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.nearMe -> supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container, nearMeFragment)
-                    .commit()
+                R.id.nearMe -> changeFragment(nearMeFragment)
+
                 R.id.search -> {
                     getSearchLauncher.launch(Intent(applicationContext, SearchActivity::class.java))
                     it.isChecked = false
                 }
-                R.id.useStatus -> supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container, useStatusFragment)
-                    .commit()
-                R.id.my -> supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container, myFragment)
-                    .commit()
+                R.id.useStatus -> changeFragment(useStatusFragment)
+                R.id.my -> changeFragment(myFragment)
             }
             true
         }
@@ -76,6 +66,13 @@ class MainActivity : AppCompatActivity() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
         if (currentFragment is IOnFocusListenable) {
             currentFragment.onWindowFocusChanged(hasFocus)
+        }
+    }
+
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, fragment)
+            commit()
         }
     }
 

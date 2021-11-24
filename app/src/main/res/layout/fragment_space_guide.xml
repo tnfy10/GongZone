@@ -42,7 +42,6 @@
         android:layout_marginStart="10dp"
         android:fontFamily="@font/noto_sans_cjk_kr_medium"
         android:includeFontPadding="false"
-        android:text="6/20"
         android:textColor="@color/gray_1000"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -55,7 +54,6 @@
         android:layout_marginStart="10dp"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
         android:includeFontPadding="false"
-        android:text="(13:45 기준)"
         android:textColor="@color/gray_600"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/numOfRemainSeatTxt"
@@ -102,7 +100,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:text="4"
         android:textSize="14sp"
         android:textColor="@color/gray_800"
         android:fontFamily="@font/noto_sans_cjk_kr_medium"
@@ -129,7 +126,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_cjk_kr_medium"
         android:includeFontPadding="false"
-        android:text="2"
         android:textColor="@color/gray_800"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/numOfRemainSmallSeatTxt"
@@ -154,7 +150,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_cjk_kr_medium"
         android:includeFontPadding="false"
-        android:text="0"
         android:textColor="@color/gray_800"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/numOfRemainMediumSeatTxt"
@@ -174,7 +169,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/storeIntroTxt"
+        android:id="@+id/storeInfoTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -182,7 +177,6 @@
         android:layout_marginTop="11dp"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
         android:includeFontPadding="false"
-        android:text="4인용 라지 테이블 보유! 노트북과 아이패드, 전공책 사용도 모두 문제없이 가능합니다."
         android:textColor="@color/gray_1000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -200,7 +194,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/storeIntroTxt" />
+        app:layout_constraintTop_toBottomOf="@+id/storeInfoTxt" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -232,7 +226,6 @@
         android:layout_marginStart="20dp"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
         android:includeFontPadding="false"
-        android:text="10:00~16:00"
         android:textColor="@color/gray_1000"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView10"
@@ -267,7 +260,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
         android:includeFontPadding="false"
-        android:text="02-123-1234"
         android:textColor="@color/gray_1000"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/businessHourTxt"
@@ -332,24 +324,5 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noticeAndEventBtn">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="testtest"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="testtest"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="testtest"
-            android:textSize="14sp" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/noticeAndEventBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

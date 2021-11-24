@@ -103,19 +103,18 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/titleTxt"
+        android:id="@+id/storeIntroTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="20dp"
-        android:text="넓은 테이블을 자랑하는 공존 플레이스"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
         android:includeFontPadding="false" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -125,59 +124,45 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/storeNameTxt"
+            android:id="@+id/storeNameAndKindTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="건대1943"
             android:textSize="16sp"
             android:textColor="@color/gray_800"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mid_dot"
-            android:textSize="16sp"
-            android:textColor="@color/gray_800"
-            android:fontFamily="@font/noto_sans_cjk_kr_regular"
-            android:includeFontPadding="false"/>
+            android:layout_gravity="end"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/storeKindTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="펍"
-            android:textSize="16sp"
-            android:textColor="@color/gray_800"
-            android:fontFamily="@font/noto_sans_cjk_kr_regular"
-            android:includeFontPadding="false"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star_one" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:src="@drawable/ic_star_one" />
+            <TextView
+                android:id="@+id/ratingTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.73"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"/>
 
-        <TextView
-            android:id="@+id/ratingTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4.73"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_cjk_kr_regular"
-            android:includeFontPadding="false"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/max_rating"
-            android:textSize="14sp"
-            android:textColor="@color/gray_600"
-            android:fontFamily="@font/noto_sans_cjk_kr_regular"
-            android:includeFontPadding="false"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/max_rating"
+                android:textSize="14sp"
+                android:textColor="@color/gray_600"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"/>
+        </LinearLayout>
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"

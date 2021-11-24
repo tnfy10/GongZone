@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/bottom_sheet_main.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_facilities_and_rental.xml" value="0.2263843648208469" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_location.xml" value="0.2263843648208469" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_near_me.xml" value="0.22" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_space_guide.xml" value="0.2263843648208469" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_store_info.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable-hdpi/filter_view_background.xml" value="0.23615635179153094" />
         <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable-hdpi/seat_select_positive.xml" value="0.23615635179153094" />
         <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/background_under_line.xml" value="0.23615635179153094" />

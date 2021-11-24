@@ -53,7 +53,7 @@
                 android:includeFontPadding="false"/>
 
             <TextView
-                android:id="@+id/timeRequiredTxt"
+                android:id="@+id/directionsTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="건국대학교 정문에서 도보 5분, 건대입구역에서 도보 10분"

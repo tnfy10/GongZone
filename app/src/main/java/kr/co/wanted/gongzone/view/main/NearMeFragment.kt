@@ -30,7 +30,9 @@ import kr.co.wanted.gongzone.adapter.FilterViewAdapter
 import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
+import kr.co.wanted.gongzone.model.space.Space
 import kr.co.wanted.gongzone.model.user.User
+import kr.co.wanted.gongzone.service.SpaceService
 import kr.co.wanted.gongzone.service.UserService
 import kr.co.wanted.gongzone.utils.PreferenceManager
 import kr.co.wanted.gongzone.utils.Size
@@ -113,10 +115,6 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
             }
         })
 
-        mainBottomSheet.includedGongZonePick.storeDetailBtn.setOnClickListener {
-            startActivity(Intent(context, StoreActivity::class.java))
-        }
-
         mainNavMenu.userBtn.setOnClickListener {
             if(checkSigned()) {
                 Toast.makeText(context, "로그인됨", Toast.LENGTH_SHORT).show()
@@ -158,6 +156,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
         }
 
         showMapFragment()
+        showGongZonePick()
 
         return binding.root
     }
@@ -378,6 +377,33 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                 })
             }
         }
+    }
+
+    /**
+     * 공존픽 로드
+     */
+    private fun showGongZonePick() {
+        SpaceService.create().getSpace("1").enqueue(object: Callback<Space>{
+            override fun onResponse(call: Call<Space>, response: Response<Space>) {
+                val spaceList = response.body()
+
+                if (spaceList != null) {
+                    val space = spaceList[0]
+                    mainBottomSheet.includedGongZonePick.storeIntroTxt.text = space.introduce
+                    "${space.name}·${space.spaceType}".also { mainBottomSheet.includedGongZonePick.storeNameAndKindTxt.text = it }
+                    mainBottomSheet.includedGongZonePick.storeDetailBtn.setOnClickListener {
+                        val intent = Intent(context, StoreActivity::class.java)
+                        intent.putExtra("spaceNum", space.spaceNum)
+                        startActivity(intent)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Space>, t: Throwable) {
+                Log.d(TAG, "통신실패: ${t.message}")
+            }
+
+        })
     }
 
     companion object {

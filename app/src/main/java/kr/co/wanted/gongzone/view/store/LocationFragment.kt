@@ -1,13 +1,17 @@
 package kr.co.wanted.gongzone.view.store
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -17,22 +21,25 @@ import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.FragmentLocationBinding
 import kr.co.wanted.gongzone.model.geocode.Geocode
 import kr.co.wanted.gongzone.service.NaverAPI
+import kr.co.wanted.gongzone.utils.Size
+import kr.co.wanted.gongzone.viewmodel.StoreActivityViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalTime
 
 class LocationFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentLocationBinding
+    private lateinit var viewModel: StoreActivityViewModel
+    private lateinit var storeActivity: StoreActivity
     private lateinit var mapView: MapView
     private lateinit var naverMap: NaverMap
     private lateinit var geocode: Geocode
 
-    private val address = "경기 부천시 부천로 1"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        storeActivity = activity as StoreActivity
     }
 
     override fun onCreateView(
@@ -40,11 +47,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLocationBinding.inflate(inflater, container, false)
-
-        binding.findWayBtn.setOnClickListener {
-            val url = "geo:${geocode.addresses[0].y},${geocode.addresses[0].x}?q=${address}"
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        }
 
         return binding.root
     }
@@ -54,6 +56,19 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         mapView = view.findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+
+        viewModel = ViewModelProvider(storeActivity)[StoreActivityViewModel::class.java]
+        viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
+            getGeocode(spaceItem.location)
+
+            binding.addressTxt.text = spaceItem.location
+            binding.directionsTxt.text = spaceItem.watToCome
+
+            binding.findWayBtn.setOnClickListener {
+                val url = "geo:${geocode.addresses[0].y},${geocode.addresses[0].x}?q=${spaceItem.location}"
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+        })
     }
 
     override fun onStart() {
@@ -103,8 +118,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         uiSettings.isZoomControlEnabled = false
         uiSettings.isTiltGesturesEnabled = false
         uiSettings.isRotateGesturesEnabled = false
-
-        getGeocode(address)
     }
 
     private fun getGeocode(address: String) {

@@ -6,13 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.ActivityStoreBinding
-import kr.co.wanted.gongzone.model.space.SpaceItem
-import kr.co.wanted.gongzone.viewmodel.StoreActivityViewModel
+import kr.co.wanted.gongzone.viewmodel.StoreViewModel
 
 class StoreActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoreBinding
-    private lateinit var viewModel: StoreActivityViewModel
+    private lateinit var viewModel: StoreViewModel
     lateinit var storeInfoFragment: StoreInfoFragment
     lateinit var enterRoomFragment: EnterRoomFragment
 
@@ -24,7 +23,7 @@ class StoreActivity : AppCompatActivity() {
         val spaceNum = intent.getStringExtra("spaceNum")
 
         if (spaceNum != null) {
-            viewModel = ViewModelProvider(this).get(StoreActivityViewModel::class.java)
+            viewModel = ViewModelProvider(this).get(StoreViewModel::class.java)
             viewModel.setSpaceLiveData(spaceNum)
         } else {
             Log.d("StoreActivity", "spaceNum값이 없음.")

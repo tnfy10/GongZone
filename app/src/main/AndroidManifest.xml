@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".view.payment.PurchaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.store.StoreActivity"
             android:exported="false" />
         <activity

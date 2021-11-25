@@ -36,6 +36,7 @@ import kr.co.wanted.gongzone.service.SpaceService
 import kr.co.wanted.gongzone.service.UserService
 import kr.co.wanted.gongzone.utils.PreferenceManager
 import kr.co.wanted.gongzone.utils.Size
+import kr.co.wanted.gongzone.view.payment.PurchaseActivity
 import kr.co.wanted.gongzone.view.sign.SignInActivity
 import kr.co.wanted.gongzone.view.store.StoreActivity
 import retrofit2.Call
@@ -124,35 +125,31 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
         }
 
         mainNavMenu.useHistoryBtn.setOnClickListener {
-
+            Toast.makeText(context, "이용내역", Toast.LENGTH_SHORT).show()
         }
 
-        mainNavMenu.ticketPurchaseBtn.setOnClickListener {
-
+        mainNavMenu.voucherPurchaseBtn.setOnClickListener {
+            startActivity(Intent(context, PurchaseActivity::class.java))
         }
 
-        mainNavMenu.ticketPurchaseHistoryBtn.setOnClickListener {
-
+        mainNavMenu.voucherPurchaseHistoryBtn.setOnClickListener {
+            Toast.makeText(context, "이용권 구매내역", Toast.LENGTH_SHORT).show()
         }
 
         mainNavMenu.favoritesBtn.setOnClickListener {
-
-        }
-
-        mainNavMenu.couponBtn.setOnClickListener {
-
+            Toast.makeText(context, "관심목록", Toast.LENGTH_SHORT).show()
         }
 
         mainNavMenu.noticeBtn.setOnClickListener {
-
+            Toast.makeText(context, "공지사항", Toast.LENGTH_SHORT).show()
         }
 
         mainNavMenu.customerServiceBtn.setOnClickListener {
-
+            Toast.makeText(context, "고객센터", Toast.LENGTH_SHORT).show()
         }
 
         mainNavMenu.settingBtn.setOnClickListener {
-
+            Toast.makeText(context, "설정", Toast.LENGTH_SHORT).show()
         }
 
         showMapFragment()

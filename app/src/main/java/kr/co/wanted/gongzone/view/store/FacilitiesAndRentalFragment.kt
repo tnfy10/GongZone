@@ -12,12 +12,12 @@ import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.FragmentFacilitiesAndRentalBinding
 import kr.co.wanted.gongzone.model.space.SpaceItem
 import kr.co.wanted.gongzone.utils.Size
-import kr.co.wanted.gongzone.viewmodel.StoreActivityViewModel
+import kr.co.wanted.gongzone.viewmodel.StoreViewModel
 
 class FacilitiesAndRentalFragment : Fragment() {
 
     private lateinit var binding: FragmentFacilitiesAndRentalBinding
-    private lateinit var viewModel: StoreActivityViewModel
+    private lateinit var viewModel: StoreViewModel
     private lateinit var storeActivity: StoreActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class FacilitiesAndRentalFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(storeActivity)[StoreActivityViewModel::class.java]
+        viewModel = ViewModelProvider(storeActivity)[StoreViewModel::class.java]
         viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
             showFacilityTable(spaceItem)
             showRentableTable(spaceItem)

@@ -9,13 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.FragmentStoreInfoBinding
-import kr.co.wanted.gongzone.viewmodel.StoreActivityViewModel
-import java.time.LocalTime
+import kr.co.wanted.gongzone.viewmodel.StoreViewModel
 
 class StoreInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentStoreInfoBinding
-    private lateinit var viewModel: StoreActivityViewModel
+    private lateinit var viewModel: StoreViewModel
     private lateinit var storeActivity: StoreActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +72,7 @@ class StoreInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(storeActivity)[StoreActivityViewModel::class.java]
+        viewModel = ViewModelProvider(storeActivity)[StoreViewModel::class.java]
         viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
             binding.storeIntroTxt.text = spaceItem.introduce
             "${spaceItem.name}·${spaceItem.spaceType}".also { binding.storeNameAndKindTxt.text = it }

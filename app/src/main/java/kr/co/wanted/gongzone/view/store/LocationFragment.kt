@@ -1,15 +1,12 @@
 package kr.co.wanted.gongzone.view.store
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.naver.maps.geometry.LatLng
@@ -21,17 +18,15 @@ import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.FragmentLocationBinding
 import kr.co.wanted.gongzone.model.geocode.Geocode
 import kr.co.wanted.gongzone.service.NaverAPI
-import kr.co.wanted.gongzone.utils.Size
-import kr.co.wanted.gongzone.viewmodel.StoreActivityViewModel
+import kr.co.wanted.gongzone.viewmodel.StoreViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalTime
 
 class LocationFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentLocationBinding
-    private lateinit var viewModel: StoreActivityViewModel
+    private lateinit var viewModel: StoreViewModel
     private lateinit var storeActivity: StoreActivity
     private lateinit var mapView: MapView
     private lateinit var naverMap: NaverMap
@@ -57,7 +52,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
-        viewModel = ViewModelProvider(storeActivity)[StoreActivityViewModel::class.java]
+        viewModel = ViewModelProvider(storeActivity)[StoreViewModel::class.java]
         viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
             getGeocode(spaceItem.location)
 

@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class StoreActivityViewModel: ViewModel() {
+class StoreViewModel: ViewModel() {
     private val spaceLiveData = MutableLiveData<SpaceItem>()
 
     private fun loadSpaceInfo(spaceNum: String) {

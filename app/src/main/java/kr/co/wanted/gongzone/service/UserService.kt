@@ -15,7 +15,7 @@ import retrofit2.http.POST
 
 interface UserService {
     @FormUrlEncoded
-    @POST("users.php")
+    @POST("user/users.php")
     fun getUser(@Field("userId") userId: String,
                 @Field("pwd") pwd: String) : Call<User>
 

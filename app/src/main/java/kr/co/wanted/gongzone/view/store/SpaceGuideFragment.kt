@@ -8,21 +8,18 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.FragmentSpaceGuideBinding
-import kr.co.wanted.gongzone.model.space.SpaceItem
 import kr.co.wanted.gongzone.utils.Size
-import kr.co.wanted.gongzone.viewmodel.StoreActivityViewModel
+import kr.co.wanted.gongzone.viewmodel.StoreViewModel
 import java.time.LocalTime
 
 class SpaceGuideFragment : Fragment() {
 
     private lateinit var binding: FragmentSpaceGuideBinding
-    private lateinit var viewModel: StoreActivityViewModel
+    private lateinit var viewModel: StoreViewModel
     private lateinit var storeActivity: StoreActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +38,7 @@ class SpaceGuideFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(storeActivity)[StoreActivityViewModel::class.java]
+        viewModel = ViewModelProvider(storeActivity)[StoreViewModel::class.java]
         viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
             val totalSeat = spaceItem.totalSeatS.toInt() + spaceItem.totalSeatM.toInt() + spaceItem.totalSeatL.toInt()
             val leastSeat = spaceItem.leastSeatS.toInt() + spaceItem.leastSeatM.toInt() + spaceItem.leastSeatL.toInt()

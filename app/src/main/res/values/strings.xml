@@ -9,8 +9,8 @@
     <string name="search_hint">장소, 지역, 학교 검색</string>
     <string name="user">사용자</string>
     <string name="use_history">이용내역</string>
-    <string name="ticket_purchase">이용권 구매</string>
-    <string name="ticket_purchase_history">이용권 구매 내역</string>
+    <string name="voucher_purchase">이용권 구매</string>
+    <string name="voucher_purchase_history">이용권 구매 내역</string>
     <string name="favorites">관심 목록</string>
     <string name="coupon">쿠폰</string>
     <string name="notice">공지사항</string>

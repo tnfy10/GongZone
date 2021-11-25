@@ -3,12 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/point_edit_text_background.xml" value="0.23848684210526316" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/voucher_background.xml" value="0.23848684210526316" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/voucher_checkbox.xml" value="0.23848684210526316" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/voucher_checkbox_checked.xml" value="0.25" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/voucher_checkbox_unchecked.xml" value="0.23848684210526316" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_notification.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_payment.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_purchase.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_store.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/bottom_sheet_main.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/filter_item.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_enter_room.xml" value="0.22828947368421051" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_facilities_and_rental.xml" value="0.2263843648208469" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_location.xml" value="0.2263843648208469" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_near_me.xml" value="0.22" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_payment.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_product_select.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_select_voucher.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_space_guide.xml" value="0.2263843648208469" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_store_info.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_voucher_select.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/nav_menu_main.xml" value="0.22861842105263158" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/voucher_item.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable-hdpi/filter_view_background.xml" value="0.23615635179153094" />
         <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable-hdpi/seat_select_positive.xml" value="0.23615635179153094" />
         <entry key="..\:/Users/tnfy1/Documents/android_project/GongZone/app/src/main/res/drawable/background_under_line.xml" value="0.23615635179153094" />

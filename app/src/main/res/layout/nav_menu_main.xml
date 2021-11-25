@@ -103,7 +103,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ticketPurchaseBtn"
+            android:id="@+id/voucherPurchaseBtn"
             android:clickable="true"
             android:background="?attr/selectableItemBackground"
             android:layout_width="match_parent"
@@ -117,28 +117,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_gravity="center_vertical"
-                android:text="@string/ticket_purchase"
+                android:text="@string/voucher_purchase"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/noto_sans_cjk_kr_regular" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ticketPurchaseHistoryBtn"
+            android:id="@+id/voucherPurchaseHistoryBtn"
             android:clickable="true"
             android:background="?attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/ticketPurchaseBtn"
-            app:layout_constraintTop_toBottomOf="@+id/ticketPurchaseBtn">
+            app:layout_constraintStart_toStartOf="@+id/voucherPurchaseBtn"
+            app:layout_constraintTop_toBottomOf="@+id/voucherPurchaseBtn">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_gravity="center_vertical"
-                android:text="@string/ticket_purchase_history"
+                android:text="@string/voucher_purchase_history"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/noto_sans_cjk_kr_regular" />
@@ -151,8 +151,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/ticketPurchaseHistoryBtn"
-            app:layout_constraintTop_toBottomOf="@+id/ticketPurchaseHistoryBtn">
+            app:layout_constraintStart_toStartOf="@+id/voucherPurchaseHistoryBtn"
+            app:layout_constraintTop_toBottomOf="@+id/voucherPurchaseHistoryBtn">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -160,27 +160,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_gravity="center_vertical"
                 android:text="@string/favorites"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/noto_sans_cjk_kr_regular" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/couponBtn"
-            android:clickable="true"
-            android:background="?attr/selectableItemBackground"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/favoritesBtn"
-            app:layout_constraintTop_toBottomOf="@+id/favoritesBtn">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_gravity="center_vertical"
-                android:text="@string/coupon"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/noto_sans_cjk_kr_regular" />
@@ -196,7 +175,7 @@
             android:background="@color/gray_200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/couponBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/favoritesBtn" />
 
         <LinearLayout
             android:id="@+id/noticeBtn"

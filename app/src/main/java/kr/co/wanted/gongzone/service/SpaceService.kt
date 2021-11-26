@@ -3,6 +3,7 @@ package kr.co.wanted.gongzone.service
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kr.co.wanted.gongzone.BuildConfig
+import kr.co.wanted.gongzone.model.seat.Seat
 import kr.co.wanted.gongzone.model.space.Space
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,6 +15,9 @@ import retrofit2.http.*
 interface SpaceService {
     @GET("/space/space.php")
     fun getSpace(@Query("spaceNum") spaceNum: String) : Call<Space>
+
+    @GET("/space/seats.php")
+    fun getSeatsInfo(@Query("spaceNum") spaceNum: String) : Call<Seat>
 
     companion object {
         private val gson: Gson = GsonBuilder().setLenient().create()

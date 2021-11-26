@@ -25,6 +25,7 @@ class StoreActivity : AppCompatActivity() {
         if (spaceNum != null) {
             viewModel = ViewModelProvider(this).get(StoreViewModel::class.java)
             viewModel.setSpaceLiveData(spaceNum)
+            viewModel.setSeatLiveData(spaceNum)
         } else {
             Log.d("StoreActivity", "spaceNum값이 없음.")
             finish()

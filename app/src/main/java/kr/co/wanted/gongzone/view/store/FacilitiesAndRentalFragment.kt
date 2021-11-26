@@ -46,9 +46,6 @@ class FacilitiesAndRentalFragment : Fragment() {
     private fun showFacilityTable(spaceItem: SpaceItem) {
         val facility = spaceItem.facility.split(";;")
 
-        val imgParams = LinearLayout.LayoutParams(Size.dpToPx(context, 0f).toInt(), WRAP_CONTENT)
-        imgParams.weight = 1f
-
         var size = facility.size/4
         if (facility.size % 4 != 0) size++
 
@@ -87,9 +84,6 @@ class FacilitiesAndRentalFragment : Fragment() {
 
     private fun showRentableTable(spaceItem: SpaceItem) {
         val rentable = spaceItem.rent.split(";;")
-
-        val imgParams = LinearLayout.LayoutParams(Size.dpToPx(context, 0f).toInt(), WRAP_CONTENT)
-        imgParams.weight = 1f
 
         var size = rentable.size/4
         if (rentable.size % 4 != 0) size++

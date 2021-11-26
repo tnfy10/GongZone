@@ -310,8 +310,8 @@
             android:id="@+id/smallTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:collapseColumns="6" />
+            android:layout_marginStart="90dp"
+            android:shrinkColumns="*"/>
     </LinearLayout>
 
     <LinearLayout
@@ -339,8 +339,8 @@
             android:id="@+id/mediumTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="31dp"
-            android:collapseColumns="6" />
+            android:layout_marginStart="77dp"
+            android:shrinkColumns="*" />
     </LinearLayout>
 
     <LinearLayout
@@ -367,16 +367,7 @@
             android:id="@+id/largeTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:collapseColumns="6" />
+            android:layout_marginStart="90dp"
+            android:shrinkColumns="*" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/testBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="테스트"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

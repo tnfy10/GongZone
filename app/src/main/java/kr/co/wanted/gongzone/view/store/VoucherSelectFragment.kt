@@ -55,7 +55,7 @@ class VoucherSelectFragment : Fragment() {
                     binding.selectSeatTxt.text = str
                 }
                 "M" -> {
-                    val str = "미디엄${alphabet[seat.seatLocate.toInt()]}"
+                    val str = "미디움${alphabet[seat.seatLocate.toInt()]}"
                     binding.selectSeatTxt.text = str
                 }
                 "L" -> {

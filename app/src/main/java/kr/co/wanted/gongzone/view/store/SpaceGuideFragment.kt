@@ -15,6 +15,7 @@ import kr.co.wanted.gongzone.databinding.FragmentSpaceGuideBinding
 import kr.co.wanted.gongzone.utils.Size
 import kr.co.wanted.gongzone.viewmodel.StoreViewModel
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class SpaceGuideFragment : Fragment() {
 
@@ -44,8 +45,9 @@ class SpaceGuideFragment : Fragment() {
             val leastSeat = spaceItem.leastSeatS.toInt() + spaceItem.leastSeatM.toInt() + spaceItem.leastSeatL.toInt()
             "$leastSeat/$totalSeat".also { binding.numOfRemainSeatTxt.text = it }
 
-            val currentTime = "(${LocalTime.now().hour}:${LocalTime.now().minute} 기준)"
-            binding.basedOnCurrentTimeTxt.text = currentTime
+            val time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
+            val timeTxt = "(${time} 기준)"
+            binding.basedOnCurrentTimeTxt.text = timeTxt
 
             binding.numOfRemainSmallSeatTxt.text = spaceItem.leastSeatS
             binding.numOfRemainMediumSeatTxt.text = spaceItem.leastSeatM

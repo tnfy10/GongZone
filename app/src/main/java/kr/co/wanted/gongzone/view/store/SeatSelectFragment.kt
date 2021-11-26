@@ -22,6 +22,9 @@ import kr.co.wanted.gongzone.model.seat.Seat
 import kr.co.wanted.gongzone.model.seat.SeatItem
 import kr.co.wanted.gongzone.utils.Size
 import kr.co.wanted.gongzone.viewmodel.StoreViewModel
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class SeatSelectFragment : Fragment() {
 
@@ -59,6 +62,20 @@ class SeatSelectFragment : Fragment() {
             setSeatTable(seat, "S")
             setSeatTable(seat, "M")
             setSeatTable(seat, "L")
+        })
+
+        viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
+            val totalSeat = spaceItem.totalSeatS.toInt() + spaceItem.totalSeatM.toInt() + spaceItem.totalSeatL.toInt()
+            val leastSeat = spaceItem.leastSeatS.toInt() + spaceItem.leastSeatM.toInt() + spaceItem.leastSeatL.toInt()
+            "$leastSeat/$totalSeat".also { binding.numOfRemainSeatTxt.text = it }
+
+            val time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
+            val timeTxt = "(${time} 기준)"
+            binding.basedOnCurrentTimeTxt.text = timeTxt
+
+            binding.numOfRemainSmallSeatTxt.text = spaceItem.leastSeatS
+            binding.numOfRemainMediumSeatTxt.text = spaceItem.leastSeatM
+            binding.numOfRemainLargeSeatTxt.text = spaceItem.leastSeatL
         })
     }
 
@@ -156,9 +173,10 @@ class SeatSelectFragment : Fragment() {
                 textView.isClickable = true
                 textView.setTextColor(resources.getColor(R.color.gray_1000, null))
             }
-            "1" -> {
+            else -> {
                 textView.setBackgroundResource(R.drawable.seat_select_negative)
                 textView.isClickable = false
+                textView.isEnabled = false
                 textView.setTextColor(Color.WHITE)
             }
         }

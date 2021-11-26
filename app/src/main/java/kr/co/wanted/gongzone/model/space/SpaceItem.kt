@@ -19,5 +19,6 @@ data class SpaceItem(
     val totalSeatL: String,
     val totalSeatM: String,
     val totalSeatS: String,
-    val watToCome: String
+    val watToCome: String,
+    val imagePath: String
 )

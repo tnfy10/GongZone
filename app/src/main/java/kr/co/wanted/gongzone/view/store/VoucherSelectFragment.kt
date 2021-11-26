@@ -1,13 +1,18 @@
 package kr.co.wanted.gongzone.view.store
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.wanted.gongzone.R
+import kr.co.wanted.gongzone.adapter.UserVoucherAdapter
 import kr.co.wanted.gongzone.databinding.FragmentVoucherSelectBinding
+import kr.co.wanted.gongzone.model.voucher.VoucherItem
 import kr.co.wanted.gongzone.viewmodel.StoreViewModel
 
 class VoucherSelectFragment : Fragment() {
@@ -16,6 +21,8 @@ class VoucherSelectFragment : Fragment() {
     private lateinit var storeActivity: StoreActivity
     private lateinit var viewModel: StoreViewModel
     private lateinit var enterRoomFragment: EnterRoomFragment
+    private var selectedItem: VoucherItem? = null
+    private var selectedPos: Int = -1
     private val alphabet = arrayOf(
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
         "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
@@ -33,9 +40,6 @@ class VoucherSelectFragment : Fragment() {
     ): View? {
         binding = FragmentVoucherSelectBinding.inflate(inflater, container, false)
 
-
-        //enterRoomFragment.activateEnterRoomBtn()
-
         return binding.root
     }
 
@@ -45,7 +49,6 @@ class VoucherSelectFragment : Fragment() {
         viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
             binding.storeIntroTxt.text = spaceItem.introduce
             binding.storeNameTxt.text = spaceItem.name
-            "${spaceItem.openTime}~${spaceItem.closeTime}".also { binding.useTimeTxt.text = it }
 
             val seat = viewModel.getSeatItem()
 
@@ -63,6 +66,33 @@ class VoucherSelectFragment : Fragment() {
                     binding.selectSeatTxt.text = str
                 }
             }
+        })
+
+        viewModel.getUserVoucherListLiveData().observe(viewLifecycleOwner, {
+            val voucherList: ArrayList<VoucherItem> = it
+            val adapter = UserVoucherAdapter()
+            adapter.listData = voucherList
+            adapter.setOnItemClickListener(object: UserVoucherAdapter.OnItemClickListener{
+                override fun onItemClick(v: View, pos: Int) {
+                    if (selectedPos == -1) {
+                        selectedItem = adapter.listData[pos]
+                        selectedPos = pos
+                        v.setBackgroundResource(R.drawable.user_voucher_selected)
+                    } else if (selectedPos != pos) {
+                        binding.voucherRecyclerView[selectedPos]
+                            .setBackgroundResource(R.drawable.user_voucher_nonselected)
+
+                        selectedItem = adapter.listData[pos]
+                        selectedPos = pos
+                        v.setBackgroundResource(R.drawable.user_voucher_selected)
+                    }
+
+                    selectedItem?.let { vc -> viewModel.setVoucherNum(vc.voucherNum) }
+                    enterRoomFragment.activateEnterRoomBtn()
+                }
+            })
+            binding.voucherRecyclerView.adapter = adapter
+            binding.voucherRecyclerView.layoutManager = LinearLayoutManager(storeActivity)
         })
     }
 

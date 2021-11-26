@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder
 import kr.co.wanted.gongzone.BuildConfig
 import kr.co.wanted.gongzone.model.seat.Seat
 import kr.co.wanted.gongzone.model.space.Space
+import kr.co.wanted.gongzone.model.voucher.Voucher
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -18,6 +20,24 @@ interface SpaceService {
 
     @GET("/space/seats.php")
     fun getSeatsInfo(@Query("spaceNum") spaceNum: String) : Call<Seat>
+
+    @GET("/voucher/voucher.php")
+    fun getUserVoucherList(@Query("userNum") userNum: String) : Call<Voucher>
+
+    @FormUrlEncoded
+    @PUT("/space/seats.php")
+    fun enterRoom(@Field("seatNum") seatNum: String,
+                  @Field("userNum") userNum: String,
+                  @Field("voucherNum") voucherNum: String,
+                  @Field("spaceNum") spaceNum: String,
+                  @Field("type") type: String) : Call<ResponseBody>
+
+    @FormUrlEncoded
+    @PUT("voucher/voucher.php")
+    fun exitRoom(@Field("seatNum") seatNum: String,
+                 @Field("userNum") userNum: String,
+                 @Field("voucherNum") voucherNum: String,
+                 @Field("availableTime") availableTime: String) : Call<ResponseBody>
 
     companion object {
         private val gson: Gson = GsonBuilder().setLenient().create()

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".view.store.VoucherSelectFragment">
 
     <LinearLayout
@@ -125,14 +125,14 @@
         android:layout_marginTop="6dp"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
         android:includeFontPadding="false"
-        android:text="이용 시간"
+        android:text="선택 좌석"
         android:textColor="@color/gray_1000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
-        android:id="@+id/useTimeTxt"
+        android:id="@+id/selectSeatTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
@@ -149,32 +149,33 @@
         android:layout_marginTop="6dp"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
         android:includeFontPadding="false"
-        android:text="선택 좌석"
+        android:text="이용 시간"
         android:textColor="@color/gray_1000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
-        android:id="@+id/selectSeatTxt"
+        android:id="@+id/useTimeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_cjk_kr_regular"
         android:includeFontPadding="false"
-        android:textColor="@color/gray_1000"
+        android:text="현재시각부터 퇴실시각까지 이용권에 따라\n차감됩니다."
+        android:textColor="@color/gray_800"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/useTimeTxt"
+        app:layout_constraintStart_toStartOf="@+id/selectSeatTxt"
         app:layout_constraintTop_toTopOf="@+id/textView16" />
 
     <View
         android:id="@+id/view5"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="20dp"
         android:background="@color/gray_400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/useTimeTxt" />
 
     <TextView
         android:id="@+id/textView17"
@@ -193,11 +194,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/voucherRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

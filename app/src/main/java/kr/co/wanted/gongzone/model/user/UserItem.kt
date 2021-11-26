@@ -5,5 +5,6 @@ data class UserItem(
     val phone: String,
     val point: String,
     val userId: String,
-    val userNum: String
+    val userNum: String,
+    val seatNum: String
 )

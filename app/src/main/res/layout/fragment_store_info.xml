@@ -173,13 +173,14 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:background="@drawable/background_under_line"
         app:tabTextColor="@color/black"
         app:tabSelectedTextColor="@color/main_color"
         app:tabIndicator="@drawable/tab_selector"
         app:tabGravity="fill"
-        app:tabMode="fixed"/>
+        app:tabMode="fixed"
+        app:tabTextAppearance="@style/StoreInfoTab" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

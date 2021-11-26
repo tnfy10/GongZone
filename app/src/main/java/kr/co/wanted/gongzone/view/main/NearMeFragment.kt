@@ -2,21 +2,24 @@ package kr.co.wanted.gongzone.view.main
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -32,6 +35,8 @@ import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
 import kr.co.wanted.gongzone.model.space.Space
 import kr.co.wanted.gongzone.model.user.User
+import kr.co.wanted.gongzone.model.user.UserItem
+import kr.co.wanted.gongzone.model.voucher.Voucher
 import kr.co.wanted.gongzone.service.SpaceService
 import kr.co.wanted.gongzone.service.UserService
 import kr.co.wanted.gongzone.utils.PreferenceManager
@@ -39,6 +44,8 @@ import kr.co.wanted.gongzone.utils.Size
 import kr.co.wanted.gongzone.view.payment.PurchaseActivity
 import kr.co.wanted.gongzone.view.sign.SignInActivity
 import kr.co.wanted.gongzone.view.store.StoreActivity
+import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,6 +61,9 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var getSearchFilterResult: ActivityResultLauncher<Intent>
     private lateinit var behavior: BottomSheetBehavior<View>
+    private var seatNum: String? = null
+    private var user: UserItem? = null
+    private var voucherNum: String? = null
     private var bottomSheetHeight: Int = 0
     private var chipIdList = ArrayList<Int>()
     lateinit var mapView: FragmentContainerView
@@ -106,6 +116,10 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
             val intent = Intent(context, SearchFilterActivity::class.java)
             intent.putExtra("chipIdList", chipIdList)
             getSearchFilterResult.launch(intent)
+        }
+
+        binding.leaveOutBtn.setOnClickListener {
+            showExitRoomPopUp()
         }
 
         behavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
@@ -352,13 +366,23 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
             if (id!=null && pwd!=null) {
                 UserService.create().getUser(id, pwd).enqueue(object: Callback<User> {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
-                        val user = response.body()?.get(0)
+                        val result = response.body()?.get(0)
 
-                        if (user!=null) {
-                            mainNavMenu.userNameTxt.text = user.name
-                            mainNavMenu.userIdTxt.text = user.userId
+                        if (result!=null) {
+                            user = result
+                            mainNavMenu.userNameTxt.text = result.name
+                            mainNavMenu.userIdTxt.text = result.userId
                             mainNavMenu.signInView.visibility = VISIBLE
                             mainNavMenu.notSignInView.visibility = GONE
+
+                            userNum = result.userNum
+                            seatNum = result.seatNum
+
+                            if (seatNum.isNullOrEmpty()) {
+                                binding.leaveOutBtn.visibility = GONE
+                            } else {
+                                binding.leaveOutBtn.visibility = VISIBLE
+                            }
                         } else {
                             mainNavMenu.signInView.visibility = GONE
                             mainNavMenu.notSignInView.visibility = VISIBLE
@@ -369,6 +393,72 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                         Log.d(TAG, "통신실패: ${t.message}")
                         mainNavMenu.signInView.visibility = GONE
                         mainNavMenu.notSignInView.visibility = VISIBLE
+                    }
+
+                })
+            }
+        }
+    }
+
+    /**
+     * 사용중인 이용권 정보 확인
+     */
+    private fun getVoucherInfo(userNum: String) {
+        SpaceService.create().getUserVoucherList(userNum).enqueue(object: Callback<Voucher>{
+            override fun onResponse(call: Call<Voucher>, response: Response<Voucher>) {
+                val voucherList = response.body()
+
+                if (voucherList != null) {
+                    for (item in voucherList) {
+                        if (item.nowUsing == "1") {
+                            voucherNum = item.voucherNum
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Voucher>, t: Throwable) {
+                Log.d(TAG, "통신실패: ${t.message}")
+            }
+
+        })
+    }
+
+    /**
+     * 퇴실하기
+     */
+    private fun exitRoom() {
+        val us = user
+
+        if (us != null) {
+            getVoucherInfo(us.userNum)
+            val vNum = voucherNum
+            if (vNum != null) {
+                SpaceService.create().exitRoom(us.seatNum, us.userNum, vNum, "0").enqueue(object: Callback<ResponseBody>{
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>,
+                    ) {
+                        val result = response.body()?.string()
+                        TODO("수정해야함")
+                        response.errorBody()?.let { Log.d("testest", it.string()) }
+
+                        if (result != null) {
+                            Log.d("testest", result.toResponseBody().string())
+                        } else {
+                            Log.d("testest", "null값")
+                        }
+
+                        if (response.isSuccessful) {
+                            showExitRoomSuccessPopUp()
+                            binding.leaveOutBtn.visibility = GONE
+                        } else {
+                            Toast.makeText(mainActivity, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.d(TAG, "통신실패: ${t.message}")
                     }
 
                 })
@@ -388,6 +478,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                     val space = spaceList[0]
                     mainBottomSheet.includedGongZonePick.storeIntroTxt.text = space.introduce
                     "${space.name}·${space.spaceType}".also { mainBottomSheet.includedGongZonePick.storeNameAndKindTxt.text = it }
+                    Glide.with(mainActivity).load(space.imagePath).into(mainBottomSheet.includedGongZonePick.storeImg)
                     mainBottomSheet.includedGongZonePick.storeDetailBtn.setOnClickListener {
                         val intent = Intent(context, StoreActivity::class.java)
                         intent.putExtra("spaceNum", space.spaceNum)
@@ -403,8 +494,57 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
         })
     }
 
+    /**
+     * 퇴실하기 팝업
+     */
+    private fun showExitRoomPopUp() {
+        val dialog = Dialog(mainActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_yes_no)
+
+        dialog.show()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+
+        val cancelBtn = dialog.findViewById<ImageButton>(R.id.cancelBtn)
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        val okBtn = dialog.findViewById<ImageButton>(R.id.okBtn)
+        okBtn.setOnClickListener {
+            exitRoom()
+            dialog.dismiss()
+        }
+
+        val popUpTxt = dialog.findViewById<TextView>(R.id.popUpTxt)
+        "퇴실 버튼을 누르면 이용이\n종료됩니다. 퇴실하시겠습니까?".also { popUpTxt.text = it }
+    }
+
+    /**
+     * 퇴실 완료 팝업
+     */
+    private fun showExitRoomSuccessPopUp() {
+        val dialog = Dialog(mainActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_end)
+
+        dialog.show()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+
+        val closeBtn = dialog.findViewById<ImageButton>(R.id.closeBtn)
+        closeBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        val popUpTxt = dialog.findViewById<TextView>(R.id.popUpTxt)
+        popUpTxt.text = "이용이 종료되었습니다."
+    }
+
     companion object {
         private const val TAG = "NearMeFragment"
+        var userNum: String? = null
 
         fun newInstance() : NearMeFragment {
             return NearMeFragment()

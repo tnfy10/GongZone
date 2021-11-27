@@ -8,6 +8,7 @@
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/ic_near_me.xml" value="0.23615635179153094" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/ic_nearme_selected.xml" value="0.23615635179153094" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/ic_search.xml" value="0.23615635179153094" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/image_outline.xml" value="0.2388157894736842" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/my_selector.xml" value="0.23615635179153094" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/near_me_selector.xml" value="0.23615635179153094" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/drawable/point_edit_text_background.xml" value="0.23848684210526316" />
@@ -26,6 +27,7 @@
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_payment.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_purchase.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_search.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_search_result.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/activity_store.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/bottom_sheet_main.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/dialog_close.xml" value="0.22828947368421051" />
@@ -47,7 +49,7 @@
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_terms_and_condition.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/fragment_voucher_select.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/nav_menu_main.xml" value="0.22861842105263158" />
-        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/search_store_view.xml" value="0.23651315789473684" />
+        <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/search_store_view.xml" value="0.22" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/store_view.xml" value="0.22861842105263158" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/user_voucher_item.xml" value="0.22828947368421051" />
         <entry key="..\:/Users/tnfy1/Documents/GongZone/app/src/main/res/layout/voucher_item.xml" value="0.22861842105263158" />

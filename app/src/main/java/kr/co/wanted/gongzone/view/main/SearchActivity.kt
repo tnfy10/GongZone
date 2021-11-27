@@ -45,7 +45,9 @@ class SearchActivity : AppCompatActivity() {
             when (actionId) {
                 IME_ACTION_SEARCH -> {
                     val searchTxt = binding.searchEdt.text.toString()
-                    searchSpace(searchTxt)
+                    val intent = Intent(applicationContext, SearchResultActivity::class.java)
+                    intent.putExtra("searchTxt", searchTxt)
+                    startActivity(intent)
                 }
             }
             return@setOnEditorActionListener true
@@ -63,45 +65,5 @@ class SearchActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         imm.hideSoftInputFromWindow(binding.searchEdt.windowToken, 0)
-    }
-
-    private fun searchSpace(searchTxt: String) {
-        SpaceService.create().searchSpace(searchTxt).enqueue(object: Callback<Space> {
-            override fun onResponse(call: Call<Space>, response: Response<Space>) {
-                if (response.isSuccessful) {
-                    val resultList = response.body()
-                    if (resultList != null) {
-                        val adapter = SpaceAdapter()
-                        adapter.listData = resultList
-                        adapter.setOnItemClickListener(object: SpaceAdapter.OnItemClickListener{
-                            override fun onItemClick(v: View, pos: Int) {
-                                val intent = Intent(applicationContext, StoreActivity::class.java)
-                                intent.putExtra("spaceNum", resultList[pos].spaceNum)
-                                startActivity(intent)
-                            }
-                        })
-                        binding.searchList.adapter = adapter
-                        binding.searchList.layoutManager = LinearLayoutManager(applicationContext)
-                        binding.searchList.visibility = VISIBLE
-                        binding.defaultLayout.visibility = GONE
-                    } else {
-                        Toast.makeText(applicationContext, "검색 결과가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
-                        binding.searchList.visibility = GONE
-                        binding.defaultLayout.visibility = VISIBLE
-                    }
-                } else {
-                    Toast.makeText(applicationContext, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
-                    binding.searchList.visibility = GONE
-                    binding.defaultLayout.visibility = VISIBLE
-                }
-            }
-
-            override fun onFailure(call: Call<Space>, t: Throwable) {
-                Toast.makeText(applicationContext, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
-                Log.d("검색", "통신 에러: ${t.message}")
-                binding.searchList.visibility = GONE
-                binding.defaultLayout.visibility = VISIBLE
-            }
-        })
     }
 }

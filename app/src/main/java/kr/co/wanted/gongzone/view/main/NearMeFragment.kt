@@ -33,6 +33,7 @@ import kr.co.wanted.gongzone.adapter.FilterViewAdapter
 import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
+import kr.co.wanted.gongzone.model.pin.Pin
 import kr.co.wanted.gongzone.model.space.Space
 import kr.co.wanted.gongzone.model.user.User
 import kr.co.wanted.gongzone.model.user.UserItem
@@ -54,7 +55,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import kotlin.math.roundToInt
 
-class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overlay.OnClickListener {
+class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback {
 
     private lateinit var binding: FragmentNearMeBinding
     private lateinit var mainActivity: MainActivity
@@ -228,14 +229,43 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
             setCameraPosition()
             naverMap.locationTrackingMode = LocationTrackingMode.Follow
         }
+
+        setSpaceMapMarker()
     }
 
-    override fun onClick(overlay: Overlay): Boolean {
-        if (overlay is Marker) {
-            Toast.makeText(context, "마커 선택됨", Toast.LENGTH_SHORT).show()
-            return true
-        }
-        return false
+    /**
+     *  지도 핀 찍기
+     */
+    private fun setSpaceMapMarker() {
+        SpaceService.create().getSpaceList().enqueue(object: Callback<Pin>{
+            override fun onResponse(call: Call<Pin>, response: Response<Pin>) {
+                if (response.isSuccessful) {
+                    val pinList = response.body()
+
+                    if (pinList != null) {
+                        for (item in pinList) {
+                            val marker = Marker()
+                            marker.position = LatLng(item.latitude.toDouble(), item.longitude.toDouble())
+                            marker.icon = OverlayImage.fromResource(R.drawable.ic_pin)
+                            marker.captionMinZoom = 12.0
+                            marker.captionMaxZoom = 16.0
+                            marker.setOnClickListener {
+                                val intent = Intent(context, StoreActivity::class.java)
+                                intent.putExtra("spaceNum", item.spaceNum)
+                                startActivity(intent)
+                                return@setOnClickListener true
+                            }
+                            marker.map = naverMap
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Pin>, t: Throwable) {
+                Log.d(TAG, "통신실패: ${t.message}")
+            }
+
+        })
     }
 
     /**

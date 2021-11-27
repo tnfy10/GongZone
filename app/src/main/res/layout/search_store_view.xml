@@ -3,8 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
     android:id="@+id/storeBtn"
     android:clickable="true">
 
@@ -12,12 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" >
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="15dp">
 
         <ImageView
             android:id="@+id/storeImg"
             android:layout_width="match_parent"
-            android:layout_height="164dp"/>
+            android:layout_height="164dp"
+            android:scaleType="centerCrop"/>
 
         <ImageButton
             android:id="@+id/favoriteBtn"

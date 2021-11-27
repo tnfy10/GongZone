@@ -95,10 +95,11 @@ class EnterRoomFragment : Fragment() {
     private fun onClickEnterRoom() {
         val seatNum = viewModel.getSeatItem().seatNum
         val userNum = NearMeFragment.userNum.toString()
-        val voucherNum = viewModel.getVoucherNum()
+        val voucher = viewModel.getVoucher()
         val spaceNum = viewModel.getSeatItem().spaceNum
         val type = viewModel.getSeatItem().type
-        SpaceService.create().enterRoom(seatNum, userNum, voucherNum, spaceNum, type)
+
+        SpaceService.create().enterRoom(seatNum, userNum, voucher.voucherNum, spaceNum, type)
             .enqueue(object: Callback<ResponseBody>{
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -111,6 +112,7 @@ class EnterRoomFragment : Fragment() {
                             "1" -> {
                                 val nowDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
                                 PreferenceManager.setString(storeActivity, "enterRoomDateTime", nowDateTime)
+                                PreferenceManager.setString(storeActivity, "availableTime", voucher.availableTime)
                                 showEnterRoomSuccessDialog()
                             }
                             else -> {

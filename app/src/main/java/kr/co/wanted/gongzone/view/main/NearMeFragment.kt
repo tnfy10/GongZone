@@ -445,7 +445,11 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val enterRoomDateTime = LocalDateTime.parse(dateTime, formatter)
                 val nowDateTime = LocalDateTime.now()
-                val availableTime = ChronoUnit.MINUTES.between(enterRoomDateTime, nowDateTime).toString()
+                val useTime = ChronoUnit.MINUTES.between(enterRoomDateTime, nowDateTime).toString().toInt()
+                val initialAvailableTime =
+                    PreferenceManager.getString(mainActivity, "availableTime")?.toInt()?.times(60)
+
+                val availableTime = initialAvailableTime?.minus(useTime).toString()
 
                 SpaceService.create().exitRoom(us.seatNum, us.userNum, vNum, availableTime).enqueue(object: Callback<ResponseBody>{
                     override fun onResponse(

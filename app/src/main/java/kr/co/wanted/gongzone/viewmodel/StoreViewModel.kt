@@ -20,7 +20,7 @@ class StoreViewModel: ViewModel() {
     private val seatLiveData = MutableLiveData<Seat>()
     private val voucherLiveData = MutableLiveData<Voucher>()
     private lateinit var seatItem: SeatItem
-    private lateinit var voucherNum: String
+    private lateinit var selectVoucher: VoucherItem
 
     private fun loadSpaceInfo(spaceNum: String) {
         SpaceService.create().getSpace(spaceNum).enqueue(object: Callback<Space> {
@@ -102,9 +102,9 @@ class StoreViewModel: ViewModel() {
 
     fun getSeatItem() = seatItem
 
-    fun setVoucherNum(num: String) {
-        voucherNum = num
+    fun setVoucher(voucher: VoucherItem) {
+        selectVoucher = voucher
     }
 
-    fun getVoucherNum() = voucherNum
+    fun getVoucher() = selectVoucher
 }

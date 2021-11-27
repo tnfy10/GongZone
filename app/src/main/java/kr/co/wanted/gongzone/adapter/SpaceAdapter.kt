@@ -6,15 +6,14 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kr.co.wanted.gongzone.databinding.SearchStoreViewBinding
-import kr.co.wanted.gongzone.databinding.StoreViewBinding
+import kr.co.wanted.gongzone.databinding.ListItemStoreViewBinding
 import kr.co.wanted.gongzone.model.space.SpaceItem
 
 class SpaceAdapter : RecyclerView.Adapter<SpaceAdapter.Holder>() {
     var listData = ArrayList<SpaceItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val binding = SearchStoreViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ListItemStoreViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return Holder(binding)
     }
@@ -39,7 +38,7 @@ class SpaceAdapter : RecyclerView.Adapter<SpaceAdapter.Holder>() {
         this.listener = listener
     }
 
-    inner class Holder(val binding: SearchStoreViewBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(val binding: ListItemStoreViewBinding): RecyclerView.ViewHolder(binding.root) {
         init {
             binding.storeBtn.setOnClickListener {
                 val pos = adapterPosition

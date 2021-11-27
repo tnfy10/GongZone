@@ -13,63 +13,67 @@
     app:behavior_halfExpandedRatio="0.36"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <LinearLayout
+    <View
+        android:id="@+id/toggleBtn"
+        android:layout_width="35dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_slide_toggle" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:paddingBottom="135dp"
+        android:overScrollMode="never">
 
-        <View
-            android:id="@+id/toggleBtn"
-            android:layout_width="35dp"
-            android:layout_height="4dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/btn_slide_toggle" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginStart="16dp"
-            android:includeFontPadding="false"
-            android:text="@string/gonezone_pick"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_cjk_kr_medium" />
-
-        <include
-            android:id="@+id/includedGongZonePick"
-            layout="@layout/store_view" />
-
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="15dp"
-            android:background="@color/gray_400" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="15dp"
-            android:includeFontPadding="false"
-            android:text="@string/gongzone_near"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_cjk_kr_medium" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="16dp"
+                android:includeFontPadding="false"
+                android:text="@string/gonezone_pick"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/storeRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="55dp"
-            android:nestedScrollingEnabled="false"
-            android:overScrollMode="never"/>
-    </LinearLayout>
+            <include
+                android:id="@+id/includedGongZonePick"
+                layout="@layout/store_view" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/gray_400" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:includeFontPadding="false"
+                android:text="@string/gongzone_near"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/storeRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

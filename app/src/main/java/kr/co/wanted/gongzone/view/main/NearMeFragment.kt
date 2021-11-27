@@ -30,6 +30,7 @@ import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.adapter.FilterViewAdapter
+import kr.co.wanted.gongzone.adapter.SpaceAdapter
 import kr.co.wanted.gongzone.databinding.BottomSheetMainBinding
 import kr.co.wanted.gongzone.databinding.FragmentNearMeBinding
 import kr.co.wanted.gongzone.databinding.NavMenuMainBinding
@@ -176,6 +177,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback {
 
         showMapFragment()
         showGongZonePick()
+        nearSpace()
 
         return binding.root
     }
@@ -541,6 +543,34 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback {
                 Log.d(TAG, "통신실패: ${t.message}")
             }
 
+        })
+    }
+
+    private fun nearSpace() {
+        // TODO: 추후 근처 매장이 나오도록 수정 필요
+        SpaceService.create().searchSpace("").enqueue(object: Callback<Space> {
+            override fun onResponse(call: Call<Space>, response: Response<Space>) {
+                if (response.isSuccessful) {
+                    val resultList = response.body()
+                    if (resultList != null) {
+                        val adapter = SpaceAdapter()
+                        adapter.listData = resultList
+                        adapter.setOnItemClickListener(object: SpaceAdapter.OnItemClickListener{
+                            override fun onItemClick(v: View, pos: Int) {
+                                val intent = Intent(mainActivity, StoreActivity::class.java)
+                                intent.putExtra("spaceNum", resultList[pos].spaceNum)
+                                startActivity(intent)
+                            }
+                        })
+                        mainBottomSheet.storeRecyclerView.adapter = adapter
+                        mainBottomSheet.storeRecyclerView.layoutManager = LinearLayoutManager(mainActivity)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Space>, t: Throwable) {
+                Log.d("근처 space", "통신 에러: ${t.message}")
+            }
         })
     }
 

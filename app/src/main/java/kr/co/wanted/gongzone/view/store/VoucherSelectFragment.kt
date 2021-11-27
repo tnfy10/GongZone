@@ -87,7 +87,7 @@ class VoucherSelectFragment : Fragment() {
                         v.setBackgroundResource(R.drawable.user_voucher_selected)
                     }
 
-                    selectedItem?.let { vc -> viewModel.setVoucherNum(vc.voucherNum) }
+                    selectedItem?.let { vc -> viewModel.setVoucher(vc) }
                     enterRoomFragment.activateEnterRoomBtn()
                 }
             })

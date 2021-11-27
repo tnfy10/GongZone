@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.FragmentEnterRoomBinding
 import kr.co.wanted.gongzone.service.SpaceService
+import kr.co.wanted.gongzone.utils.PreferenceManager
 import kr.co.wanted.gongzone.view.main.MainActivity
 import kr.co.wanted.gongzone.view.main.NearMeFragment
 import kr.co.wanted.gongzone.viewmodel.StoreViewModel
@@ -24,6 +25,8 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class EnterRoomFragment : Fragment() {
 
@@ -89,7 +92,7 @@ class EnterRoomFragment : Fragment() {
         }
     }
 
-    fun onClickEnterRoom() {
+    private fun onClickEnterRoom() {
         val seatNum = viewModel.getSeatItem().seatNum
         val userNum = NearMeFragment.userNum.toString()
         val voucherNum = viewModel.getVoucherNum()
@@ -105,7 +108,11 @@ class EnterRoomFragment : Fragment() {
 
                     if (response.isSuccessful) {
                         when (result) {
-                            "1" -> showEnterRoomSuccessDialog()
+                            "1" -> {
+                                val nowDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                                PreferenceManager.setString(storeActivity, "enterRoomDateTime", nowDateTime)
+                                showEnterRoomSuccessDialog()
+                            }
                             else -> {
                                 Toast.makeText(storeActivity, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                             }

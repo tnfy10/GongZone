@@ -49,6 +49,9 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import kotlin.math.roundToInt
 
 class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overlay.OnClickListener {
@@ -409,7 +412,6 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                 val voucherList = response.body()
 
                 if (voucherList != null) {
-                    Log.d("testest", "가져옴 : ${voucherList.size}")
                     for (item in voucherList) {
                         if (item.nowUsing == "1") {
                             voucherNum = item.voucherNum
@@ -435,7 +437,13 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
             getVoucherInfo(us.userNum)
             val vNum = voucherNum
             if (vNum != null) {
-                SpaceService.create().exitRoom(us.seatNum, us.userNum, vNum, "0").enqueue(object: Callback<ResponseBody>{
+                val dateTime = PreferenceManager.getString(mainActivity, "enterRoomDateTime")
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                val enterRoomDateTime = LocalDateTime.parse(dateTime, formatter)
+                val nowDateTime = LocalDateTime.now()
+                val availableTime = ChronoUnit.MINUTES.between(enterRoomDateTime, nowDateTime).toString()
+
+                SpaceService.create().exitRoom(us.seatNum, us.userNum, vNum, availableTime).enqueue(object: Callback<ResponseBody>{
                     override fun onResponse(
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>,

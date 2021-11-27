@@ -16,6 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface SpaceService {
+    @GET("space/spaceList.php")
+    fun searchSpace(@Query("spaceName") spaceName: String) : Call<Space>
+
     @GET("/space/space.php")
     fun getSpace(@Query("spaceNum") spaceNum: String) : Call<Space>
 
@@ -30,7 +33,16 @@ interface SpaceService {
 
     @FormUrlEncoded
     @POST("voucher/voucher.php")
-    fun paymentVoucher(@Field("userNum") userNum: String,
+    fun addVoucher(@Field("userNum") userNum: String,
+                       @Field("type") type: String,
+                       @Field("availableTime") availableTime: String,
+                       @Field("day") day: String) : Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("voucher/cashPoint.php")
+    fun paymentVoucher(@Field("cost") cost: String,
+                       @Field("point") point: String,
+                       @Field("userNum") userNum: String,
                        @Field("type") type: String,
                        @Field("availableTime") availableTime: String,
                        @Field("day") day: String) : Call<ResponseBody>

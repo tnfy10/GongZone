@@ -50,6 +50,7 @@ class PaymentFragment : Fragment() {
     private lateinit var viewModel: VoucherViewModel
     private lateinit var user: UserItem
     private var userPoint = 0
+    private var productAmount = 0
     private var finalPaymentAmount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +84,7 @@ class PaymentFragment : Fragment() {
         "${currentDate}~${endDate}".also { binding.availablePeriodTxt.text = it }
         "${voucherList[0].time} 시간".also { binding.availableTimeTxt.text = it }
 
-        val productAmount = voucherList[0].price
+        productAmount = voucherList[0].price
         "${DecimalFormat("###,###,###").format(productAmount)} 원".also {
             binding.productAmountTxt.text = it }
 
@@ -191,12 +192,13 @@ class PaymentFragment : Fragment() {
      * 결제 정보 등록
      */
     private fun paymentInfoInsert(userNum: String, type: String, availableTime: String, day: String) {
-        SpaceService.create().paymentVoucher(userNum, type, availableTime, day).enqueue(object: Callback<ResponseBody>{
+        SpaceService.create().addVoucher(userNum, type, availableTime, day).enqueue(object: Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     when (response.body()?.string()) {
                         "1" -> {
                             Iamport.close()
+                            addPaymentHistory(userNum, type, availableTime, day)
                             showPaymentSuccessDialog()
                         }
                         else -> {
@@ -205,6 +207,29 @@ class PaymentFragment : Fragment() {
                     }
                 } else {
                     Toast.makeText(purchaseActivity, "결제 정보 등록 실패", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.d("결제 정보 등록", "통신실패: ${t.message}")
+            }
+
+        })
+    }
+
+    private fun addPaymentHistory(userNum: String, type: String, availableTime: String, day: String) {
+        SpaceService.create().paymentVoucher(
+            productAmount.toString(),
+            userPoint.toString(),
+            userNum,
+            type,
+            availableTime,
+            day).enqueue(object: Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    Log.d("결제 정보 등록", "응답코드: ${response.body()?.string()}")
+                } else {
+                    Log.d("결제 정보 등록", "응답 받지 못함")
                 }
             }
 

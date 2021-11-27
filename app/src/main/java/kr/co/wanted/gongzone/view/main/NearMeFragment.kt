@@ -146,7 +146,11 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
         }
 
         mainNavMenu.voucherPurchaseBtn.setOnClickListener {
-            startActivity(Intent(context, PurchaseActivity::class.java))
+            if (checkSigned()) {
+                startActivity(Intent(context, PurchaseActivity::class.java))
+            } else {
+                Toast.makeText(context, "로그인 후 이용가능합니다.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         mainNavMenu.voucherPurchaseHistoryBtn.setOnClickListener {

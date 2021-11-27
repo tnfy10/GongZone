@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.FragmentStoreInfoBinding
+import kr.co.wanted.gongzone.utils.PreferenceManager
 import kr.co.wanted.gongzone.viewmodel.StoreViewModel
 
 class StoreInfoFragment : Fragment() {
@@ -60,10 +62,14 @@ class StoreInfoFragment : Fragment() {
         })
 
         binding.enterRoomBtn.setOnClickListener {
-            storeActivity.supportFragmentManager.beginTransaction().apply {
-                replace(R.id.container, storeActivity.enterRoomFragment)
-                addToBackStack(null)
-                commit()
+            if (checkSigned()) {
+                storeActivity.supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.container, storeActivity.enterRoomFragment)
+                    addToBackStack(null)
+                    commit()
+                }
+            } else {
+                Toast.makeText(context, "로그인 후 이용가능합니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -85,6 +91,12 @@ class StoreInfoFragment : Fragment() {
             commit()
         }
     }
+
+    /**
+     * 로그인 여부 확인
+     */
+    private fun checkSigned()
+            = PreferenceManager.getBoolean(storeActivity, "isSigned")
 
     companion object {
         fun newInstance(): StoreInfoFragment {

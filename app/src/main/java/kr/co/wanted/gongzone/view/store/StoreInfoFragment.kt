@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import kr.co.wanted.gongzone.R
 import kr.co.wanted.gongzone.databinding.FragmentStoreInfoBinding
@@ -81,7 +82,8 @@ class StoreInfoFragment : Fragment() {
         viewModel = ViewModelProvider(storeActivity)[StoreViewModel::class.java]
         viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
             binding.storeIntroTxt.text = spaceItem.introduce
-            "${spaceItem.name}·${spaceItem.spaceType}".also { binding.storeNameAndKindTxt.text = it }
+            "${spaceItem.spaceName}·${spaceItem.spaceType}".also { binding.storeNameAndKindTxt.text = it }
+            Glide.with(storeActivity).load(spaceItem.imagePath).into(binding.storeImg)
         })
     }
 

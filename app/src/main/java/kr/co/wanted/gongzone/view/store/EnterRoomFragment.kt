@@ -83,7 +83,7 @@ class EnterRoomFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(storeActivity)[StoreViewModel::class.java]
         viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
-            binding.storeNameTxt.text = spaceItem.name
+            binding.storeNameTxt.text = spaceItem.spaceName
         })
 
         val userNum = NearMeFragment.userNum

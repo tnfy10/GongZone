@@ -48,7 +48,7 @@ class VoucherSelectFragment : Fragment() {
         viewModel = ViewModelProvider(storeActivity)[StoreViewModel::class.java]
         viewModel.getSpaceLiveData().observe(viewLifecycleOwner, { spaceItem ->
             binding.storeIntroTxt.text = spaceItem.introduce
-            binding.storeNameTxt.text = spaceItem.name
+            binding.storeNameTxt.text = spaceItem.spaceName
 
             val seat = viewModel.getSeatItem()
 

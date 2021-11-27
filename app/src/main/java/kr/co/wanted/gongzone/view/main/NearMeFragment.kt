@@ -497,7 +497,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                 if (spaceList != null) {
                     val space = spaceList[0]
                     mainBottomSheet.includedGongZonePick.storeIntroTxt.text = space.introduce
-                    "${space.name}·${space.spaceType}".also { mainBottomSheet.includedGongZonePick.storeNameAndKindTxt.text = it }
+                    "${space.spaceName}·${space.spaceType}".also { mainBottomSheet.includedGongZonePick.storeNameAndKindTxt.text = it }
                     Glide.with(mainActivity).load(space.imagePath).into(mainBottomSheet.includedGongZonePick.storeImg)
                     mainBottomSheet.includedGongZonePick.storeDetailBtn.setOnClickListener {
                         val intent = Intent(context, StoreActivity::class.java)

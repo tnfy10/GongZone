@@ -9,7 +9,7 @@ data class SpaceItem(
     val leastSeatM: String,
     val leastSeatS: String,
     val location: String,
-    val name: String,
+    val spaceName: String,
     val notice: String,
     val openTime: String,
     val phone: String,

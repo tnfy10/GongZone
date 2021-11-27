@@ -25,6 +25,13 @@ interface SpaceService {
     fun getUserVoucherList(@Query("userNum") userNum: String) : Call<Voucher>
 
     @FormUrlEncoded
+    @POST("voucher/voucher.php")
+    fun paymentVoucher(@Field("userNum") userNum: String,
+                       @Field("type") type: String,
+                       @Field("availableTime") availableTime: String,
+                       @Field("day") day: String) : Call<ResponseBody>
+
+    @FormUrlEncoded
     @PUT("/space/seats.php")
     fun enterRoom(@Field("seatNum") seatNum: String,
                   @Field("userNum") userNum: String,

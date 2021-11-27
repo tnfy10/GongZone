@@ -101,12 +101,12 @@ class EnterRoomFragment : Fragment() {
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>,
                 ) {
+                    val result = response.body()?.string()
+
                     if (response.isSuccessful) {
-                        Log.d("testest", response.body().toString())
-                        TODO("수정해야함")
-                        when (response.body().toString()) {
+                        when (result) {
                             "1" -> showEnterRoomSuccessDialog()
-                            "0" -> {
+                            else -> {
                                 Toast.makeText(storeActivity, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -118,7 +118,6 @@ class EnterRoomFragment : Fragment() {
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     Log.d("입실", "통신실패: ${t.message}")
                 }
-
             })
     }
 

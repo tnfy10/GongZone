@@ -409,6 +409,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                 val voucherList = response.body()
 
                 if (voucherList != null) {
+                    Log.d("testest", "가져옴 : ${voucherList.size}")
                     for (item in voucherList) {
                         if (item.nowUsing == "1") {
                             voucherNum = item.voucherNum
@@ -427,7 +428,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
     /**
      * 퇴실하기
      */
-    private fun exitRoom() {
+    private fun exitRoom(dialog: Dialog) {
         val us = user
 
         if (us != null) {
@@ -440,25 +441,28 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
                         response: Response<ResponseBody>,
                     ) {
                         val result = response.body()?.string()
-                        TODO("수정해야함")
-                        response.errorBody()?.let { Log.d("testest", it.string()) }
-
-                        if (result != null) {
-                            Log.d("testest", result.toResponseBody().string())
-                        } else {
-                            Log.d("testest", "null값")
-                        }
 
                         if (response.isSuccessful) {
-                            showExitRoomSuccessPopUp()
-                            binding.leaveOutBtn.visibility = GONE
+                            when (result) {
+                                "1" -> {
+                                    dialog.dismiss()
+                                    showExitRoomSuccessPopUp()
+                                    binding.leaveOutBtn.visibility = GONE
+                                }
+                                else -> {
+                                    dialog.dismiss()
+                                    Toast.makeText(mainActivity, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         } else {
+                            dialog.dismiss()
                             Toast.makeText(mainActivity, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                         Log.d(TAG, "통신실패: ${t.message}")
+                        dialog.dismiss()
                     }
 
                 })
@@ -513,8 +517,7 @@ class NearMeFragment : Fragment(), IOnFocusListenable, OnMapReadyCallback, Overl
 
         val okBtn = dialog.findViewById<ImageButton>(R.id.okBtn)
         okBtn.setOnClickListener {
-            exitRoom()
-            dialog.dismiss()
+            exitRoom(dialog)
         }
 
         val popUpTxt = dialog.findViewById<TextView>(R.id.popUpTxt)
